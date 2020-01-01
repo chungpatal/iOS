@@ -49,13 +49,17 @@ struct DetailInfo: Codable {
 
 enum Category: Int, Codable {
     case all = 0
-    case lifeControl = 1 //생애관리
+    case facility = 1 //시설물
     case maintenance = 2 //유지관리
     case fire = 3//소방
     case gas = 4//가스
     case electronic = 5//전기
     case elevator = 6//승강기
     case building = 7//건축물
+    
+    var rawVal: Int {
+        return self.rawValue
+    }
 
     var name: String {
         switch self {
@@ -65,12 +69,12 @@ enum Category: Int, Codable {
             return "소방"
         case .gas:
             return "가스"
-        case .lifeControl:
-            return "생애관리"
+        case .facility:
+            return "시설물"
         case .maintenance:
-            return "생애관리"
-        case .electronic:
             return "유지관리"
+        case .electronic:
+            return "전기"
         case .building:
             return "건축물"
         case .elevator:
@@ -86,7 +90,7 @@ enum Category: Int, Codable {
             return #imageLiteral(resourceName: "iconFire")
         case .gas:
             return #imageLiteral(resourceName: "iconGas")
-        case .lifeControl:
+        case .facility:
             return #imageLiteral(resourceName: "iconHouse")
         case .maintenance:
             return #imageLiteral(resourceName: "iconSetting")

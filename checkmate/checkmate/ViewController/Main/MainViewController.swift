@@ -11,7 +11,7 @@ import UIKit
 class MainViewController: UIViewController {
 
     @IBOutlet weak var searchTextField: UITextField!
-    var categories: [Category] = [.all, .lifeControl, .maintenance, .fire, .gas, .electronic, .elevator, .building]
+    var categories: [Category] = [.all, .facility, .maintenance, .fire, .gas, .electronic, .elevator, .building]
     
     @IBAction func search(
         _ sender: Any) {
@@ -24,12 +24,7 @@ class MainViewController: UIViewController {
         setNavigationImage()
         setCollectionView()
     }
-    func setNavigationImage() {
-        let logo = #imageLiteral(resourceName: "logo")
-        let imageView = UIImageView(image:logo)
-        self.navigationItem.titleView = imageView
 
-    }
     func setCollectionView() {
            collectionView.delegate = self
            collectionView.dataSource = self
@@ -51,9 +46,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let buildingListVC = mainStoryboard.viewController(BuildingListViewController.self)
-        buildingListVC.selectedCategory = categories[indexPath.row]
-        self.show(buildingListVC, sender: nil)
+        let placeListVC = mainStoryboard.viewController(PlaceListViewController.self)
+        placeListVC.selectedCategory = categories[indexPath.row]
+        placeListVC.categories = self.categories
+        self.show(placeListVC, sender: nil)
     }
 }
 

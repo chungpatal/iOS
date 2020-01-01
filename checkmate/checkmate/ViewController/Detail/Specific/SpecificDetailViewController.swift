@@ -8,11 +8,11 @@
 
 import UIKit
 
-class SpecificDetailViewController: UIViewController {
+class SpecificDetailViewController: UIViewController, NibLoadable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.setNavigationImage()
         // Do any additional setup after loading the view.
     }
     

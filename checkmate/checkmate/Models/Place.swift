@@ -10,10 +10,10 @@ import UIKit
 
 struct PlaceInfoModel: Codable {
     let message: String
-    let data: [PlaceInfo]
+    let data: [Place]
 }
 
-struct PlaceInfo: Codable {
+struct Place: Codable {
     let placeIdx: Int
     let name, pk, info: String
     let grade: SafetyGrade
@@ -29,6 +29,17 @@ enum SafetyGrade: Int, Codable {
     case safe = 0
     case warn = 1
     case danger = 2
+    
+    var name: String {
+        switch self {
+        case .safe:
+            return "안전"
+        case .warn:
+            return "주의"
+        case .danger:
+            return "경고"
+        }
+    }
     
     var colorImage: UIImage {
         switch self {

@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
+//  AllDetailViewController.swift
 //  checkmate
 //
-//  Created by 강수진 on 2020/01/01.
+//  Created by 강수진 on 2020/01/02.
 //  Copyright © 2020 강수진. All rights reserved.
 //
 
@@ -14,7 +14,7 @@ struct SampleTable {
     let safetyGrade : SafetyGrade
 }
 
-class ViewController: UIViewController {
+class AllDetailViewController: UIViewController, NibLoadable {
     @IBOutlet var tableView: ExpandableTableView!
     let gas = SampleTable(type: .gas, safetyGrade: .warn)
     let fire = SampleTable(type: .fire, safetyGrade: .danger)
@@ -23,10 +23,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         parentCells = [gas, fire]
-        
         tableView.expandableDelegate = self
         tableView.animation = .automatic
-        
+        self.setNavigationImage()
         registerTableViewCells()
     }
     
@@ -36,7 +35,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: ExpandableDelegate {
+extension AllDetailViewController: ExpandableDelegate {
     func numberOfSections(in tableView: ExpandableTableView) -> Int {
           return 1
       }
@@ -129,5 +128,3 @@ extension ViewController: ExpandableDelegate {
     }
  
 }
-
-

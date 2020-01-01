@@ -7,19 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B13CA1D23BD311C008C7994 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B13CA1C23BD311C008C7994 /* UIViewController+Extension.swift */; };
+		3B13CA1F23BD31E3008C7994 /* AllDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B13CA1E23BD31E3008C7994 /* AllDetailViewController.swift */; };
 		3B48B19923BCE61A00E1EE85 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B19823BCE61A00E1EE85 /* MainViewController.swift */; };
 		3B48B19B23BCF06300E1EE85 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B19A23BCF06300E1EE85 /* UICollectionView+Extension.swift */; };
 		3B48B19D23BCF0C600E1EE85 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B19C23BCF0C600E1EE85 /* MainCollectionViewCell.swift */; };
 		3B48B19F23BCF45100E1EE85 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B19E23BCF45100E1EE85 /* UIView+Extension.swift */; };
-		3B48B1A623BCF77C00E1EE85 /* BuildingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B1A523BCF77C00E1EE85 /* BuildingListViewController.swift */; };
 		3B48B1A823BCF7A800E1EE85 /* SpecificDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B1A723BCF7A800E1EE85 /* SpecificDetailViewController.swift */; };
 		3B48B1AA23BCF7F000E1EE85 /* Storyboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B1A923BCF7F000E1EE85 /* Storyboard+Extension.swift */; };
+		3B48B1AD23BCFD2B00E1EE85 /* PlaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B1AC23BCFD2B00E1EE85 /* PlaceListViewController.swift */; };
+		3B48B1B123BCFF2300E1EE85 /* PlaceListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B1B023BCFF2300E1EE85 /* PlaceListTableViewCell.swift */; };
+		3B48B1B323BCFF3600E1EE85 /* PlaceListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B1B223BCFF3600E1EE85 /* PlaceListCollectionViewCell.swift */; };
+		3B48B1B623BCFFF300E1EE85 /* CategoryLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B1B523BCFFF300E1EE85 /* CategoryLayout.swift */; };
 		3BCB7A4623BCDA2D0082B5AA /* PlaceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCB7A4523BCDA2D0082B5AA /* PlaceDetail.swift */; };
-		3BCB7A4823BCDD7D0082B5AA /* PlaceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCB7A4723BCDD7D0082B5AA /* PlaceInfo.swift */; };
+		3BCB7A4823BCDD7D0082B5AA /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCB7A4723BCDD7D0082B5AA /* Place.swift */; };
 		3BCB7A4D23BCE0C00082B5AA /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCB7A4C23BCE0C00082B5AA /* String+Extension.swift */; };
 		3BE014C223BC915D00EB89D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE014C123BC915D00EB89D3 /* AppDelegate.swift */; };
 		3BE014C423BC915D00EB89D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE014C323BC915D00EB89D3 /* SceneDelegate.swift */; };
-		3BE014C623BC915D00EB89D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE014C523BC915D00EB89D3 /* ViewController.swift */; };
 		3BE014C923BC915D00EB89D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BE014C723BC915D00EB89D3 /* Main.storyboard */; };
 		3BE014CB23BC915E00EB89D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BE014CA23BC915E00EB89D3 /* Assets.xcassets */; };
 		3BE014CE23BC915E00EB89D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BE014CC23BC915E00EB89D3 /* LaunchScreen.storyboard */; };
@@ -32,20 +36,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B13CA1C23BD311C008C7994 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		3B13CA1E23BD31E3008C7994 /* AllDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDetailViewController.swift; sourceTree = "<group>"; };
 		3B48B19823BCE61A00E1EE85 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3B48B19A23BCF06300E1EE85 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		3B48B19C23BCF0C600E1EE85 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		3B48B19E23BCF45100E1EE85 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		3B48B1A523BCF77C00E1EE85 /* BuildingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingListViewController.swift; sourceTree = "<group>"; };
 		3B48B1A723BCF7A800E1EE85 /* SpecificDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificDetailViewController.swift; sourceTree = "<group>"; };
 		3B48B1A923BCF7F000E1EE85 /* Storyboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboard+Extension.swift"; sourceTree = "<group>"; };
+		3B48B1AC23BCFD2B00E1EE85 /* PlaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListViewController.swift; sourceTree = "<group>"; };
+		3B48B1B023BCFF2300E1EE85 /* PlaceListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListTableViewCell.swift; sourceTree = "<group>"; };
+		3B48B1B223BCFF3600E1EE85 /* PlaceListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListCollectionViewCell.swift; sourceTree = "<group>"; };
+		3B48B1B523BCFFF300E1EE85 /* CategoryLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryLayout.swift; sourceTree = "<group>"; };
 		3BCB7A4523BCDA2D0082B5AA /* PlaceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetail.swift; sourceTree = "<group>"; };
-		3BCB7A4723BCDD7D0082B5AA /* PlaceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceInfo.swift; sourceTree = "<group>"; };
+		3BCB7A4723BCDD7D0082B5AA /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		3BCB7A4C23BCE0C00082B5AA /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		3BE014BE23BC915D00EB89D3 /* checkmate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = checkmate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BE014C123BC915D00EB89D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BE014C323BC915D00EB89D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3BE014C523BC915D00EB89D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3BE014C823BC915D00EB89D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3BE014CA23BC915E00EB89D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BE014CD23BC915E00EB89D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -81,14 +89,6 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		3B48B1A123BCF74100E1EE85 /* BuildingList */ = {
-			isa = PBXGroup;
-			children = (
-				3B48B1A523BCF77C00E1EE85 /* BuildingListViewController.swift */,
-			);
-			path = BuildingList;
-			sourceTree = "<group>";
-		};
 		3B48B1A223BCF75100E1EE85 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,7 +101,7 @@
 		3B48B1A323BCF75B00E1EE85 /* All */ = {
 			isa = PBXGroup;
 			children = (
-				3BE014C523BC915D00EB89D3 /* ViewController.swift */,
+				3B13CA1E23BD31E3008C7994 /* AllDetailViewController.swift */,
 				3BE014D923BC967A00EB89D3 /* ExpandableCells.swift */,
 				3BE014DD23BC9D1300EB89D3 /* ExpandableCell2.xib */,
 				3BE014DF23BC9D7000EB89D3 /* ExpandedCell.xib */,
@@ -117,10 +117,28 @@
 			path = Specific;
 			sourceTree = "<group>";
 		};
+		3B48B1AB23BCFD1800E1EE85 /* PlaceList */ = {
+			isa = PBXGroup;
+			children = (
+				3B48B1AC23BCFD2B00E1EE85 /* PlaceListViewController.swift */,
+				3B48B1B023BCFF2300E1EE85 /* PlaceListTableViewCell.swift */,
+				3B48B1B223BCFF3600E1EE85 /* PlaceListCollectionViewCell.swift */,
+			);
+			path = PlaceList;
+			sourceTree = "<group>";
+		};
+		3B48B1B423BCFFE700E1EE85 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				3B48B1B523BCFFF300E1EE85 /* CategoryLayout.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
 		3BCB7A4923BCDDA10082B5AA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3BCB7A4723BCDD7D0082B5AA /* PlaceInfo.swift */,
+				3BCB7A4723BCDD7D0082B5AA /* Place.swift */,
 				3BCB7A4523BCDA2D0082B5AA /* PlaceDetail.swift */,
 			);
 			path = Models;
@@ -130,7 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				3B48B1A023BCF72100E1EE85 /* Main */,
-				3B48B1A123BCF74100E1EE85 /* BuildingList */,
+				3B48B1AB23BCFD1800E1EE85 /* PlaceList */,
 				3B48B1A223BCF75100E1EE85 /* Detail */,
 			);
 			path = ViewController;
@@ -144,6 +162,7 @@
 				3B48B19A23BCF06300E1EE85 /* UICollectionView+Extension.swift */,
 				3B48B19E23BCF45100E1EE85 /* UIView+Extension.swift */,
 				3B48B1A923BCF7F000E1EE85 /* Storyboard+Extension.swift */,
+				3B13CA1C23BD311C008C7994 /* UIViewController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -169,6 +188,7 @@
 		3BE014C023BC915D00EB89D3 /* checkmate */ = {
 			isa = PBXGroup;
 			children = (
+				3B48B1B423BCFFE700E1EE85 /* Layout */,
 				3BCB7A4B23BCE0AD0082B5AA /* Extensions */,
 				3BCB7A4A23BCDDA50082B5AA /* ViewController */,
 				3BCB7A4923BCDDA10082B5AA /* Models */,
@@ -317,20 +337,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3BE014C623BC915D00EB89D3 /* ViewController.swift in Sources */,
+				3B48B1B623BCFFF300E1EE85 /* CategoryLayout.swift in Sources */,
+				3B48B1B123BCFF2300E1EE85 /* PlaceListTableViewCell.swift in Sources */,
+				3B48B1B323BCFF3600E1EE85 /* PlaceListCollectionViewCell.swift in Sources */,
 				3B48B19F23BCF45100E1EE85 /* UIView+Extension.swift in Sources */,
 				3B48B19B23BCF06300E1EE85 /* UICollectionView+Extension.swift in Sources */,
+				3B48B1AD23BCFD2B00E1EE85 /* PlaceListViewController.swift in Sources */,
 				3BCB7A4D23BCE0C00082B5AA /* String+Extension.swift in Sources */,
+				3B13CA1D23BD311C008C7994 /* UIViewController+Extension.swift in Sources */,
 				3B48B1A823BCF7A800E1EE85 /* SpecificDetailViewController.swift in Sources */,
 				3BE014C223BC915D00EB89D3 /* AppDelegate.swift in Sources */,
 				3B48B1AA23BCF7F000E1EE85 /* Storyboard+Extension.swift in Sources */,
 				3BE014C423BC915D00EB89D3 /* SceneDelegate.swift in Sources */,
-				3B48B1A623BCF77C00E1EE85 /* BuildingListViewController.swift in Sources */,
-				3BCB7A4823BCDD7D0082B5AA /* PlaceInfo.swift in Sources */,
+				3BCB7A4823BCDD7D0082B5AA /* Place.swift in Sources */,
 				3BE014DA23BC967A00EB89D3 /* ExpandableCells.swift in Sources */,
 				3B48B19D23BCF0C600E1EE85 /* MainCollectionViewCell.swift in Sources */,
 				3BCB7A4623BCDA2D0082B5AA /* PlaceDetail.swift in Sources */,
 				3BE014D823BC95A100EB89D3 /* NibLoadable.swift in Sources */,
+				3B13CA1F23BD31E3008C7994 /* AllDetailViewController.swift in Sources */,
 				3BE014D623BC94EC00EB89D3 /* UITableView+Extension.swift in Sources */,
 				3B48B19923BCE61A00E1EE85 /* MainViewController.swift in Sources */,
 			);
