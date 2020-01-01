@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpandedCell" rowHeight="198" id="AVD-YD-6uj" customClass="ExpandedCell" customModule="checkmate" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="198"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AVD-YD-6uj" id="ADd-5l-MO0">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="198"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1u-M7-2qO">
+                        <rect key="frame" x="16" y="26" width="382" height="146"/>
+                        <string key="text">처분 기준 ; 건축사법 시행령 제29조의2 별표1 개별기준 9호 가
+영업 정지 시작일 : 20041108
+영업정지 종료일 : 20050107
+처분일 : 20041103</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="j1u-M7-2qO" secondAttribute="bottom" constant="26" id="2H3-YX-ffV"/>
+                    <constraint firstItem="j1u-M7-2qO" firstAttribute="leading" secondItem="ADd-5l-MO0" secondAttribute="leading" constant="16" id="Hgg-Cc-YPY"/>
+                    <constraint firstAttribute="trailing" secondItem="j1u-M7-2qO" secondAttribute="trailing" constant="16" id="fZr-D3-btQ"/>
+                    <constraint firstItem="j1u-M7-2qO" firstAttribute="top" secondItem="ADd-5l-MO0" secondAttribute="top" constant="26" id="zCy-yR-cs9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="titleLabel" destination="j1u-M7-2qO" id="IdU-Vm-ha1"/>
+            </connections>
+            <point key="canvasLocation" x="-184.05797101449278" y="150"/>
+        </tableViewCell>
+    </objects>
+</document>
