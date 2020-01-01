@@ -214,6 +214,9 @@
                                             <rect key="frame" x="16" y="20.666666666666671" width="73" height="30"/>
                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
                                             <state key="normal" title="높은 등급 순"/>
+                                            <connections>
+                                                <action selector="highOrder:" destination="pjd-hw-LbX" eventType="touchUpInside" id="QCb-yP-Bzs"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAi-aq-gt4">
                                             <rect key="frame" x="101" y="20.666666666666671" width="73" height="30"/>
@@ -221,6 +224,9 @@
                                             <state key="normal" title="낮은 등급 순">
                                                 <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="lowOrder:" destination="pjd-hw-LbX" eventType="touchUpInside" id="YQE-Xf-hRW"/>
+                                            </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHk-hK-SHo">
                                             <rect key="frame" x="0.0" y="67" width="414" height="50"/>
@@ -452,6 +458,8 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Ryt-Q7-fIR" id="fgw-Zn-Tn5"/>
+                        <outlet property="highOrderButton" destination="VFn-Eh-CFD" id="e5y-3J-cSy"/>
+                        <outlet property="lowOrderButton" destination="BAi-aq-gt4" id="lOW-F0-Qqf"/>
                         <outlet property="tableView" destination="yNb-OD-MAQ" id="2oN-6r-FBf"/>
                     </connections>
                 </viewController>
@@ -894,6 +902,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aij-0X-ouw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2338" y="135"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="QCL-lF-0ox">
+            <objects>
+                <viewController id="ROZ-RC-rvM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qpc-VJ-Qke">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="HQc-NT-SM8"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1EI-ye-En1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3124" y="133"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xLd-MP-nzW">

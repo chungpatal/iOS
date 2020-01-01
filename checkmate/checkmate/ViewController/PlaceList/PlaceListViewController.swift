@@ -12,7 +12,8 @@ class PlaceListViewController: UIViewController, NibLoadable {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var tableView: UITableView!
-    
+    @IBOutlet weak var highOrderButton: UIButton!
+    @IBOutlet weak var lowOrderButton: UIButton!
     var selectedCategory: Category?
     var selectedCategoryRow: Int = 0
     var places: [Place] = [] {
@@ -46,6 +47,17 @@ class PlaceListViewController: UIViewController, NibLoadable {
         if let layout = collectionView.collectionViewLayout as? CategoryLayout {
             layout.delegate = self
         }
+    }
+    @IBAction func highOrder(_ sender: Any) {
+        print("high")
+        highOrderButton.setTitleColor(#colorLiteral(red: 0, green: 0.462745098, blue: 1, alpha: 1), for: .normal)
+        lowOrderButton.setTitleColor(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1), for: .normal)
+        
+    }
+    @IBAction func lowOrder(_ sender: Any) {
+        print("low")
+        lowOrderButton.setTitleColor(#colorLiteral(red: 0, green: 0.462745098, blue: 1, alpha: 1), for: .normal)
+        highOrderButton.setTitleColor(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1), for: .normal)
     }
 }
 
