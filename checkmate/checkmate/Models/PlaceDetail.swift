@@ -47,7 +47,7 @@ struct DetailInfo: Codable {
     }
 }
 
-enum Category: Int, Codable {
+enum Category: Int, Codable, CaseIterable {
     case all = 0
     case facility = 1 //시설물
     case maintenance = 2 //유지관리

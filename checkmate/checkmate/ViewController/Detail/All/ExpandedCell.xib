@@ -17,6 +17,9 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1u-M7-2qO">
                         <rect key="frame" x="16" y="26" width="382" height="146"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="146" id="Hm4-6H-yow"/>
+                        </constraints>
                         <string key="text">처분 기준 ; 건축사법 시행령 제29조의2 별표1 개별기준 9호 가
 영업 정지 시작일 : 20041108
 영업정지 종료일 : 20050107

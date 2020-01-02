@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddExpandedCell" rowHeight="254" id="Hy9-aS-6LY" customClass="AddExpandedCell" customModule="checkmate" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="254"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hy9-aS-6LY" id="E2o-WX-aZf">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="254"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3P-SP-jV8" customClass="RoundButton" customModule="checkmate" customModuleProvider="target">
+                        <rect key="frame" x="76" y="10" width="52" height="26"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="26" id="10U-Xw-Aj7"/>
+                            <constraint firstAttribute="width" constant="52" id="cRG-xa-eJH"/>
+                        </constraints>
+                        <state key="normal" title="주의">
+                            <color key="titleColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="13"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="selectButton:" destination="Hy9-aS-6LY" eventType="touchUpInside" id="c6Y-BJ-6Xv"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRZ-W7-UHH" customClass="RoundButton" customModule="checkmate" customModuleProvider="target">
+                        <rect key="frame" x="136" y="10" width="52" height="26"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="52" id="bZH-Gq-zne"/>
+                            <constraint firstAttribute="height" constant="26" id="ikL-KS-cx2"/>
+                        </constraints>
+                        <state key="normal" title="경고">
+                            <color key="titleColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="13"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="selectButton:" destination="Hy9-aS-6LY" eventType="touchUpInside" id="IEv-kG-J9Y"/>
+                        </connections>
+                    </button>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FQW-be-tjL">
+                        <rect key="frame" x="36" y="59" width="342" height="170"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="170" id="Jw8-92-sIH"/>
+                        </constraints>
+                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZM-PV-koZ" customClass="RoundButton" customModule="checkmate" customModuleProvider="target">
+                        <rect key="frame" x="16" y="10" width="52" height="26"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="26" id="h5i-hJ-gXW"/>
+                            <constraint firstAttribute="width" constant="52" id="ynL-Qe-SQc"/>
+                        </constraints>
+                        <state key="normal" title="안전">
+                            <color key="titleColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="13"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="selectButton:" destination="Hy9-aS-6LY" eventType="touchUpInside" id="c6l-Ww-wwn"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Y3P-SP-jV8" firstAttribute="centerY" secondItem="0ZM-PV-koZ" secondAttribute="centerY" id="5YQ-7p-Atz"/>
+                    <constraint firstAttribute="bottom" secondItem="FQW-be-tjL" secondAttribute="bottom" constant="25" id="Azr-Q1-V16"/>
+                    <constraint firstItem="FQW-be-tjL" firstAttribute="top" secondItem="0ZM-PV-koZ" secondAttribute="bottom" constant="23" id="Dxq-IK-ljC"/>
+                    <constraint firstItem="FQW-be-tjL" firstAttribute="leading" secondItem="E2o-WX-aZf" secondAttribute="leadingMargin" constant="16" id="U4w-gU-amz"/>
+                    <constraint firstItem="0ZM-PV-koZ" firstAttribute="top" secondItem="E2o-WX-aZf" secondAttribute="top" constant="10" id="WkI-zS-FzI"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="FQW-be-tjL" secondAttribute="trailing" constant="16" id="aXc-fC-Avy"/>
+                    <constraint firstItem="Y3P-SP-jV8" firstAttribute="leading" secondItem="0ZM-PV-koZ" secondAttribute="trailing" constant="8" id="f6W-xM-2nA"/>
+                    <constraint firstItem="fRZ-W7-UHH" firstAttribute="leading" secondItem="Y3P-SP-jV8" secondAttribute="trailing" constant="8" id="odr-KM-hhH"/>
+                    <constraint firstItem="fRZ-W7-UHH" firstAttribute="centerY" secondItem="Y3P-SP-jV8" secondAttribute="centerY" id="pIA-8R-bxV"/>
+                    <constraint firstItem="0ZM-PV-koZ" firstAttribute="leading" secondItem="E2o-WX-aZf" secondAttribute="leading" constant="16" id="uAD-lx-kof"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="dangerButton" destination="fRZ-W7-UHH" id="hGE-aI-vuv"/>
+                <outlet property="descTextView" destination="FQW-be-tjL" id="KUC-Re-IEo"/>
+                <outlet property="safeButton" destination="0ZM-PV-koZ" id="5CE-U4-Fq1"/>
+                <outlet property="warnButton" destination="Y3P-SP-jV8" id="Z0w-kG-Ycl"/>
+            </connections>
+            <point key="canvasLocation" x="-256.52173913043481" y="83.705357142857139"/>
+        </tableViewCell>
+    </objects>
+</document>

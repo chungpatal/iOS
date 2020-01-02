@@ -7,24 +7,20 @@
 //
 
 import UIKit
-import ExpandableCell
 
-struct SampleTable {
-    let type: Category
-    let safetyGrade : SafetyGrade
-}
 
 class AllDetailViewController: UIViewController, NibLoadable {
-    @IBOutlet var tableView: ExpandableTableView!
-    let gas = SampleTable(type: .gas, safetyGrade: .warn)
-    let fire = SampleTable(type: .fire, safetyGrade: .danger)
-    var parentCells : [SampleTable] = []
+    @IBOutlet var tableView: UITableView!
+
+    var tableViewData = [ExpandCellData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        parentCells = [gas, fire]
-        tableView.expandableDelegate = self
-        tableView.animation = .automatic
+        tableViewData = Category.allCases.map { (category) in
+            return ExpandCellData(opened: false, category: category, safetyGrade: .unknown, desc: "내용")
+        }
+        tableView.delegate = self
+        tableView.dataSource = self
         self.setNavigationImage()
         registerTableViewCells()
     }
@@ -35,96 +31,55 @@ class AllDetailViewController: UIViewController, NibLoadable {
     }
 }
 
-extension AllDetailViewController: ExpandableDelegate {
-    func numberOfSections(in tableView: ExpandableTableView) -> Int {
-          return 1
-      }
+extension AllDetailViewController : UITableViewDelegate, UITableViewDataSource {
     
-    func expandableTableView(_ expandableTableView: ExpandableTableView, numberOfRowsInSection section: Int) -> Int {
-        //parent cell 개수
-        return parentCells.count
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return tableViewData.count
     }
-    
-    func expandableTableView(_ expandableTableView: ExpandableTableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //parent cell 높이
-        return 44
-    }
-    
-    func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //parentCell 내용
-        guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableCell2.ID) as? ExpandableCell2 else { return
-            UITableViewCell() }
-        cell.titleLabel.text = parentCells[indexPath.row].type.name
-        cell.saftyGradeImageView.image = parentCells[indexPath.row].safetyGrade.colorImage
-        cell.arrowImageView.isHidden = true
-        return cell
-    }
-    
-    func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]? {
-        //child cell 내용
-        switch parentCells[indexPath.row].type {
-        case .gas:
-            let cell = tableView.cell(for: ExpandedCell.self)
-            cell.titleLabel.text = "gas"
-            return [cell]
-        case .fire:
-            let cell = tableView.cell(for: ExpandedCell.self)
-            cell.titleLabel.text = "fire"
-            return [cell]
-        default:
-            let cell = tableView.cell(for: ExpandedCell.self)
-            cell.titleLabel.text = "기본 차일드"
-            return [cell]
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableViewData[section].opened {
+            //위에 섹션까지 포함되니까
+            return 2
+        } else {
+            return 1
         }
     }
     
-    func expandableTableView(_ expandableTableView: ExpandableTableView, heightsForExpandedRowAt indexPath: IndexPath) -> [CGFloat]? {
-        //child cell height
-        //todo 카테고리에 맞게 적절히 때려박기...?
-        switch parentCells[indexPath.row].type {
-        case .gas:
-            return [100]
-        case .fire:
-            return [100]
-        default:
-            return [140]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.cell(for: ExpandableCell2.self)
+            cell.configure(data: tableViewData[indexPath.section])
+            cell.moreLabel.text = "더보기"
+            return cell
+        } else {
+            let cell = tableView.cell(for: ExpandedCell.self)
+            cell.configure(data: tableViewData[indexPath.section])
+            return cell
         }
     }
-
-    func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath) {
-        //parent cell 클릭
-        guard let cell = expandableTableView.cellForRow(at: indexPath) as? ExpandableCell2 else { return }
-        if cell.highlightAnimation == .animated {
-            if cell.isExpanded() {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //아래 셀 클릭할때 닫히지 않도록
+        if indexPath.row == 0 {
+            tableViewData[indexPath.section].opened = !tableViewData[indexPath.section].opened
+            let sections = IndexSet.init(integer: indexPath.section)
+            tableView.reloadSections(sections, with: .none) //play animation
+            
+            let cell = tableView.cellForRow(at: indexPath) as? ExpandableCell2
+            if tableViewData[indexPath.section].opened {
                 //닫기
-                cell.moreLabel.text = "더보기"
+                cell?.moreLabel.text = "접기"
                 UIView.animate(withDuration: 0.3) {
-                    cell.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)
+                    cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)
                 }
             } else {
-                //펼치기
-                cell.moreLabel.text = "접기"
+                //열기
+                cell?.moreLabel.text = "더보기"
                 UIView.animate(withDuration: 0.3) {
-                    cell.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
+                    cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
                 }
             }
         }
-        print("didSelectRow:\(indexPath)")
     }
-    
-    func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectExpandedRowAt indexPath: IndexPath) {
-        //child cell 클릭
-        print("didSelectExpandedRowAt:\(indexPath)")
-    }
-    
-    func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCell: UITableViewCell, didSelectExpandedRowAt indexPath: IndexPath) {
-        if let cell = expandedCell as? ExpandedCell {
-            print("\(cell.titleLabel.text ?? "")")
-        }
-    }
-    
-    func expandableTableView(_ expandableTableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
- 
 }
+

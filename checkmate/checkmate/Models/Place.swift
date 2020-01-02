@@ -29,6 +29,11 @@ enum SafetyGrade: Int, Codable {
     case safe = 0
     case warn = 1
     case danger = 2
+    case unknown = 3
+    
+    var rawVal: Int {
+        return self.rawValue
+    }
     
     var name: String {
         switch self {
@@ -38,6 +43,8 @@ enum SafetyGrade: Int, Codable {
             return "주의"
         case .danger:
             return "경고"
+        default:
+            return "미정"
         }
     }
     
@@ -49,6 +56,8 @@ enum SafetyGrade: Int, Codable {
             return #imageLiteral(resourceName: "iconRed")
         case .warn:
             return #imageLiteral(resourceName: "iconYellow")
+        default:
+            return UIImage()
         }
     }
 }

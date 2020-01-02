@@ -9,17 +9,10 @@
 import UIKit
 
 extension UIView {
-//    func makeRounded(cornerRadius: CGFloat? = nil) {
-//        if let cornerRadius = cornerRadius {
-//            self.layer.cornerRadius = cornerRadius
-//        } else {
-//            self.layer.cornerRadius = self.layer.frame.height / 2
-//        }
-//        self.layer.masksToBounds = true
-//    }
     func makeRounded(cornerRadius: CGFloat) {
         self.layer.cornerRadius = cornerRadius
         self.layer.masksToBounds = true
+        
         //self.contentView.clipsToBounds = true
     }
     func makeBorder(color: UIColor, width: CGFloat) {
