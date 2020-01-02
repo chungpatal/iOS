@@ -43,7 +43,7 @@ enum SafetyGrade: Int, Codable {
             return "주의"
         case .danger:
             return "경고"
-        default:
+        case .unknown:
             return "미정"
         }
     }
@@ -56,8 +56,8 @@ enum SafetyGrade: Int, Codable {
             return #imageLiteral(resourceName: "iconRed")
         case .warn:
             return #imageLiteral(resourceName: "iconYellow")
-        default:
-            return UIImage()
+        case .unknown:
+            return #imageLiteral(resourceName: "iconGray")
         }
     }
 }

@@ -19,11 +19,13 @@ class MainViewController: UIViewController {
     @IBAction func addInfo(_ sender: Any) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let addVC = mainStoryboard.viewController(AddViewController.self)
-        addVC.modalPresentationStyle = .fullScreen
         addVC.tableViewData = Category.allCases.map { (category) in
             return ExpandCellData(opened: false, category: category, safetyGrade: .unknown, desc: "")
         }
-        self.present(addVC, animated: true)
+        let navi = UINavigationController(rootViewController: addVC)
+        navi.modalPresentationStyle = .fullScreen
+        navi.navigationBar.tintColor = #colorLiteral(red: 0.3321701288, green: 0.3321786821, blue: 0.3321741223, alpha: 1)
+        self.present(navi, animated: true)
     }
   
     @IBOutlet weak var collectionView: UICollectionView!

@@ -15,6 +15,11 @@ class ExpandableCell2: UITableViewCell, NibLoadable {
     @IBOutlet weak var customArrowImage: UIImageView!
     
     func configure(data: ExpandCellData) {
+        if data.opened {
+            customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
+        } else {
+            customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)
+        }
         titleLabel.text = data.category.name
         changeCircleColor(selectedGrade: data.safetyGrade)
     }

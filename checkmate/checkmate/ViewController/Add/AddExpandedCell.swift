@@ -27,6 +27,7 @@ class AddExpandedCell: UITableViewCell, NibLoadable {
         selectedGrade = data.safetyGrade
         descTextView.text = data.desc
         changeButtonColor(selectedGrade: data.safetyGrade)
+        
     }
     
     func changeButtonColor(selectedGrade: SafetyGrade) {

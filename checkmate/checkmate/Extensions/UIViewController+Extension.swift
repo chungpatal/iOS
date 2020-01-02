@@ -13,8 +13,8 @@ extension UIViewController {
         let logo = #imageLiteral(resourceName: "logo")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
-        self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "buttonaBack")
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "buttonaBack")
+        self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "buttonBackNav")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "buttonBackNav")
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 }

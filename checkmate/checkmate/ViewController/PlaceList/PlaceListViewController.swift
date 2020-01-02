@@ -11,15 +11,23 @@ import UIKit
 class PlaceListViewController: UIViewController, NibLoadable {
     
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView?
     @IBOutlet weak var highOrderButton: UIButton!
     @IBOutlet weak var lowOrderButton: UIButton!
-    var selectedCategory: Category?
-    var selectedCategoryRow: Int = 0
-    var isOrderHigh = true
-    var places: [Place] = [] {
+    var selectedCategory: Category? {
         didSet {
-            self.tableView.reloadData()
+            sortPlaces()
+        }
+    }
+    var selectedCategoryRow: Int = 0
+    var isOrderHigh = Bool() {
+        didSet {
+            sortPlaces()
+        }
+    }
+    var places: [PlaceDetail] = [] {
+        didSet {
+            self.tableView?.reloadData()
         }
     }
     var categories: [Category] = []
@@ -31,8 +39,59 @@ class PlaceListViewController: UIViewController, NibLoadable {
         setTableView()
         selectInitialCategory()
         setNavigation()
-        places.append(Place(placeIdx: 0, name: "사랑의집", pk: "13", info: "좋아용", grade: .danger))
+        places = corePlace //todo delete
+        isOrderHigh = true
     }
+    
+    func sortPlaces() {
+        //sort
+        if selectedCategory == .all {
+            if isOrderHigh {
+                places.sort {
+                    if $0.totalGrade == .unknown {
+                        return false
+                    }
+                    return $0.totalGrade.rawVal < $1.totalGrade.rawVal
+                }
+            } else {
+                places.sort {
+                    if $0.totalGrade == .unknown {
+                        return false
+                    }
+                    return $0.totalGrade.rawVal > $1.totalGrade.rawVal
+                }
+            }
+        } else {
+            if isOrderHigh {
+                places.sort {
+                    let categoryGrade1 = $0.detailInfo.filter { (detailInfo) in
+                        return detailInfo.categoryIdx == selectedCategory
+                    }.first?.grade
+                    let categoryGrade2 = $1.detailInfo.filter { (detailInfo) in
+                        return detailInfo.categoryIdx == selectedCategory
+                    }.first?.grade
+                    if categoryGrade1 == .unknown {
+                        return false
+                    }
+                    return categoryGrade1?.rawVal ?? 0 < categoryGrade2?.rawVal ?? 0
+                }
+            } else {
+                places.sort {
+                    let categoryGrade1 = $0.detailInfo.filter { (detailInfo) in
+                        return detailInfo.categoryIdx == selectedCategory
+                    }.first?.grade
+                    let categoryGrade2 = $1.detailInfo.filter { (detailInfo) in
+                        return detailInfo.categoryIdx == selectedCategory
+                    }.first?.grade
+                    if categoryGrade1 == .unknown {
+                        return false
+                    }
+                    return categoryGrade1?.rawVal ?? 0 > categoryGrade2?.rawVal ?? 0
+                }
+            }
+        }
+    }
+    
     func selectInitialCategory() {
         self.collectionView.selectItem(at: IndexPath(item: selectedCategory?.rawVal ?? 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     }
@@ -41,8 +100,8 @@ class PlaceListViewController: UIViewController, NibLoadable {
         collectionView.dataSource = self
     }
     func setTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
+        tableView?.delegate = self
+        tableView?.dataSource = self
     }
     func setCollectionViewLayout() {
         if let layout = collectionView.collectionViewLayout as? CategoryLayout {
@@ -50,14 +109,12 @@ class PlaceListViewController: UIViewController, NibLoadable {
         }
     }
     @IBAction func highOrder(_ sender: Any) {
-        print("high")
         isOrderHigh = true
         highOrderButton.setTitleColor(#colorLiteral(red: 0, green: 0.462745098, blue: 1, alpha: 1), for: .normal)
         lowOrderButton.setTitleColor(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1), for: .normal)
         
     }
     @IBAction func lowOrder(_ sender: Any) {
-        print("low")
         isOrderHigh = false
         lowOrderButton.setTitleColor(#colorLiteral(red: 0, green: 0.462745098, blue: 1, alpha: 1), for: .normal)
         highOrderButton.setTitleColor(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1), for: .normal)
@@ -93,9 +150,12 @@ extension PlaceListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.cell(for: PlaceListTableViewCell.self)
-        cell.configure(data: places[indexPath.row])
+        if let selectedCategory = selectedCategory {
+            cell.configure(category: selectedCategory, data: places[indexPath.row])
+        }
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         guard let selectedCategory = selectedCategory else {
@@ -103,10 +163,12 @@ extension PlaceListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         if selectedCategory == .all {
             let allDetailVC = mainStoryboard.viewController(AllDetailViewController.self)
+            allDetailVC.selectedPlace = places[indexPath.row]
             self.show(allDetailVC, sender: nil)
         } else {
             let specificDetailVC = mainStoryboard.viewController(SpecificDetailViewController.self)
             specificDetailVC.selectedCategory = selectedCategory
+            specificDetailVC.selectedPlace = places[indexPath.row]
             self.show(specificDetailVC, sender: nil)
         }
         tableView.deselectRow(at: indexPath, animated: true)

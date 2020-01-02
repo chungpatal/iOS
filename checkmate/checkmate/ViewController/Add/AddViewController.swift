@@ -28,12 +28,44 @@ class AddViewController: UIViewController, NibLoadable {
     @IBOutlet var useCategoryTextField: UITextField!
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
+    lazy var pickerView: UIPickerView = {
+        let picker = UIPickerView()
+        picker.delegate = self
+        picker.dataSource = self
+        return picker
+    }()
+    private var pickerData: [String] = []
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setData()
         setupUI()
         setupTableView()
         setNavigationBarImage()
+        setNavigation()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    //todo 야매 지우기
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        addressTextField.text = "도화길 29-1"
+    }
+    
+    @IBAction func search(_ sender: Any) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let searchListVC = mainStoryboard.viewController(SearchViewController.self)
+        self.show(searchListVC, sender: nil)
     }
     
     func setNavigationBarImage() {
@@ -54,6 +86,9 @@ class AddViewController: UIViewController, NibLoadable {
     }
     
     func setData() {
+        pickerData = PlaceUsage.allCases.map({
+            return $0.name
+        })
         guard let selectedPlace = selectedPlace else {
             return
         }
@@ -68,14 +103,16 @@ class AddViewController: UIViewController, NibLoadable {
     }
     
     func setupUI() {
+        useCategoryTextField.inputView = pickerView
         guard let selectedPlace = selectedPlace else {
             return
         }
+        addressTextField.text = selectedPlace.address
         nameTextField.text = selectedPlace.name
         legalTownNameTextField.text = selectedPlace.legalName
         realNumTextField.text = selectedPlace.num
-        useCategoryTextField.text = Category(rawValue: selectedPlace.useIdx)?.name
         pkNumTextField.text = selectedPlace.pk
+        useCategoryTextField.text = PlaceUsage(rawValue: selectedPlace.useIdx)?.name
     }
     
     @IBAction func cancel(_ sender: Any) {
@@ -84,13 +121,13 @@ class AddViewController: UIViewController, NibLoadable {
     
     @IBAction func done(_ sender: Any) {
         print("이름: \(nameTextField.text)")
-        //todo child에 있는 내용물들 뽑아내기
         for (sectionIndex, _) in tableViewData.enumerated() {
             let sectionData = tableViewData[sectionIndex]
             print(sectionData.desc)
             print(sectionData.category.name)
             print(sectionData.safetyGrade.rawVal)
         }
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -137,12 +174,12 @@ extension AddViewController : UITableViewDelegate, UITableViewDataSource {
             if tableViewData[indexPath.section].opened {
                 //닫기
                 UIView.animate(withDuration: 0.3) {
-                    cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)
+                    cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
                 }
             } else {
                 //열기
                 UIView.animate(withDuration: 0.3) {
-                    cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
+                    cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)
                 }
             }
         }
@@ -159,5 +196,25 @@ extension AddViewController: AddExpandedCellDelegate {
             self.tableViewData[sectionIndex].safetyGrade = grade
             cell.changeCircleColor(selectedGrade: grade)
         }
+    }
+}
+
+
+extension AddViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        useCategoryTextField.text = pickerData[row]
+        self.view.endEditing(true)
     }
 }

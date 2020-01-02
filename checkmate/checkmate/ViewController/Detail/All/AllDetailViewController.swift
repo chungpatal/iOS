@@ -24,11 +24,23 @@ class AllDetailViewController: UIViewController, NibLoadable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupFirstData() //todo 지우기
         self.setupTableView()
         self.setNavigation()
         self.setupUI()
         self.setupData()
+    }
+    
+    //todo 지우기 - 엄청야매
+    override func viewDidDisappear(_ animated: Bool) {
+        selectedPlace?.detailInfo[Category.gas.rawVal-1].grade = .warn
+        selectedPlace?.detailInfo[Category.gas.rawVal-1].detail =
+        """
+        최종 검사일: 20200103
+        검사일: 20200103
+        검사 결과명: 조건부합격
+        """
+        setupData()
+        tableView.reloadData()
     }
     
     func setupUI() {
@@ -40,7 +52,7 @@ class AllDetailViewController: UIViewController, NibLoadable {
         safetyGradeLabel.text = selectedPlace.totalGrade.name
         legalTownNameLabel.text = selectedPlace.legalName
         realNumLabel.text = selectedPlace.num
-        useCategoryLabel.text = Category(rawValue: selectedPlace.useIdx)?.name
+        useCategoryLabel.text = PlaceUsage(rawValue: selectedPlace.useIdx)?.name
         pkNumLabel.text = selectedPlace.pk
     }
     
@@ -56,48 +68,14 @@ class AllDetailViewController: UIViewController, NibLoadable {
         })
     }
     
-    func setupFirstData() {
-        let sampleDetail =  [DetailInfo(categoryIdx: .building, grade: .safe, detail: "내용입니다"),
-                             DetailInfo(categoryIdx: .electronic, grade: .danger, detail:
-                                """
-                                처분 기준 ; 건축사법 시행령 제29조의2 별표1 개별기준 9호 가
-                                영업 정지 시작일 : 20041108
-                                영업정지 종료일 : 20050107
-                                처분일 : 20041103
-                                """),
-                             DetailInfo(categoryIdx: .elevator, grade: .danger, detail: "내용입니다"),
-                             DetailInfo(categoryIdx: .facility, grade: .safe, detail: "내용입니다"),
-                             DetailInfo(categoryIdx: .fire, grade: .warn, detail: "내용입니다"),
-                             DetailInfo(categoryIdx: .gas, grade: .safe, detail:
-                                """
-                                처분 기준 ; 건축사법 시행령 제29조의2 별표1 개별기준 9호 가
-                                영업 정지 시작일 : 20041108
-                                영업정지 종료일 : 20050107
-                                처분일 : 20041103
-                                처분 기준 ; 건축사법 시행령 제29조의2 별표1 개별기준 9호 가
-                                영업 정지 시작일 : 20041108
-                                영업정지 종료일 : 20050107
-                                처분일 : 20041103
-                                """),
-                             DetailInfo(categoryIdx: .maintenance, grade: .warn, detail: "내용입니다")]
-        let sampleData = PlaceDetail(placeIdx: 0,
-                                     name: "사랑의집",
-                                     address: "합정",
-                                     totalGrade: .danger,
-                                     legalName: "공덕동",
-                                     num: "0168/0000",
-                                     useIdx: 1,
-                                     pk: "140-00",
-                                     detailInfo: sampleDetail)
-        selectedPlace = sampleData
-    }
-    
     @IBAction func editInfo(_ sender: Any) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let addVC = mainStoryboard.viewController(AddViewController.self)
-        addVC.modalPresentationStyle = .fullScreen
         addVC.selectedPlace = selectedPlace
-        self.present(addVC, animated: true)
+        let navi = UINavigationController(rootViewController: addVC)
+        navi.modalPresentationStyle = .fullScreen
+        navi.navigationBar.tintColor = #colorLiteral(red: 0.3321701288, green: 0.3321786821, blue: 0.3321741223, alpha: 1)
+        self.present(navi, animated: true)
     }
     @IBAction func map(_ sender: Any) {
         
@@ -155,13 +133,13 @@ extension AllDetailViewController : UITableViewDelegate, UITableViewDataSource {
                 //닫기
                 cell?.moreLabel.text = "접기"
                 UIView.animate(withDuration: 0.3) {
-                    cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)
+                    cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
                 }
             } else {
                 //열기
                 cell?.moreLabel.text = "더보기"
                 UIView.animate(withDuration: 0.3) {
-                    cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
+                    cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)
                 }
             }
         }

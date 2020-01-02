@@ -21,7 +21,7 @@ struct PlaceDetail: Codable {
     let legalName, num: String
     let useIdx: Int
     let pk: String
-    let detailInfo: [DetailInfo]
+    var detailInfo: [DetailInfo]
 
     enum CodingKeys: String, CodingKey {
         case placeIdx = "place_idx"
@@ -36,10 +36,63 @@ struct PlaceDetail: Codable {
     }
 }
 
+enum PlaceUsage:Int, Codable, CaseIterable {
+    case liveTogeter = 1 //공동주택
+    case factory = 2 //공장
+    case study = 3//교육연구시설
+    case etc = 4//기타
+    case elder = 5//노유자시설
+    case liveAlone = 6//단독주택
+    case bed = 7 // 숙박시설
+    case work = 8 //업무시설
+    case hospital = 9 // 의료시설
+    case car = 10 //자동차관련시설
+    case first = 11//제1종근린생활시설
+    case second = 12//제2종근린생활시설
+    case church = 13 //종교시설
+    case warehouse = 14  //창고시설
+    
+    var name : String{
+        switch self {
+        case .liveTogeter:
+            return "공동주택"
+        case .factory:
+            return "공장"
+        case .study:
+            return "교육연구시설"
+        case .etc:
+            return "기타"
+        case .elder:
+            return "노유자시설"
+        case .liveAlone:
+            return "단독주택"
+        case .bed:
+            return "숙박시설"
+        case .work:
+            return "업무시설"
+        case .hospital:
+            return "의료시설"
+        case .car:
+            return "자동차관련시설"
+        case .first:
+            return "제1종근린생활시설"
+        case .second:
+            return "제2종근린생활시설"
+        case .church:
+            return "종교시설"
+        case .warehouse:
+            return "창고시설"
+        @unknown default:
+            return ""
+        }
+    }
+    
+}
+
 struct DetailInfo: Codable {
-    let categoryIdx: Category
-    let grade: SafetyGrade
-    let detail: String
+    var categoryIdx: Category
+    var grade: SafetyGrade = .unknown
+    var detail: String = ""
 
     enum CodingKeys: String, CodingKey {
         case categoryIdx = "category_idx"
