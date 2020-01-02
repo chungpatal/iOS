@@ -9,10 +9,11 @@
 import UIKit
 
 class ExpandedCell: UITableViewCell, NibLoadable {
-    static let ID = "ExpandedCell"
-//
-   @IBOutlet var titleLabel: UILabel!
+    @IBOutlet weak var titleLabelHeight: NSLayoutConstraint!
+    @IBOutlet var titleLabel: UILabel!
     func configure(data: ExpandCellData) {
         titleLabel.text = data.desc
+        let estimatedHeight = titleLabel.text?.height(withConstrainedWidth: self.contentView.frame.width, font:titleLabel.font) ?? 0
+        titleLabelHeight.constant = estimatedHeight
     }
 }

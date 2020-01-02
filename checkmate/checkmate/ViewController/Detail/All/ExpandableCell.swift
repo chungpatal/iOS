@@ -9,7 +9,6 @@
 import UIKit
 
 class ExpandableCell2: UITableViewCell, NibLoadable {
-    static let ID = "ExpandableCell2"
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var moreLabel: UILabel!
     @IBOutlet weak var saftyGradeImageView: UIImageView!

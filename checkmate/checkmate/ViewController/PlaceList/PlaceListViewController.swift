@@ -16,6 +16,7 @@ class PlaceListViewController: UIViewController, NibLoadable {
     @IBOutlet weak var lowOrderButton: UIButton!
     var selectedCategory: Category?
     var selectedCategoryRow: Int = 0
+    var isOrderHigh = true
     var places: [Place] = [] {
         didSet {
             self.tableView.reloadData()
@@ -29,7 +30,7 @@ class PlaceListViewController: UIViewController, NibLoadable {
         setCollectionView()
         setTableView()
         selectInitialCategory()
-        setNavigationImage()
+        setNavigation()
         places.append(Place(placeIdx: 0, name: "사랑의집", pk: "13", info: "좋아용", grade: .danger))
     }
     func selectInitialCategory() {
@@ -50,12 +51,14 @@ class PlaceListViewController: UIViewController, NibLoadable {
     }
     @IBAction func highOrder(_ sender: Any) {
         print("high")
+        isOrderHigh = true
         highOrderButton.setTitleColor(#colorLiteral(red: 0, green: 0.462745098, blue: 1, alpha: 1), for: .normal)
         lowOrderButton.setTitleColor(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1), for: .normal)
         
     }
     @IBAction func lowOrder(_ sender: Any) {
         print("low")
+        isOrderHigh = false
         lowOrderButton.setTitleColor(#colorLiteral(red: 0, green: 0.462745098, blue: 1, alpha: 1), for: .normal)
         highOrderButton.setTitleColor(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1), for: .normal)
     }
@@ -103,6 +106,7 @@ extension PlaceListViewController: UITableViewDelegate, UITableViewDataSource {
             self.show(allDetailVC, sender: nil)
         } else {
             let specificDetailVC = mainStoryboard.viewController(SpecificDetailViewController.self)
+            specificDetailVC.selectedCategory = selectedCategory
             self.show(specificDetailVC, sender: nil)
         }
         tableView.deselectRow(at: indexPath, animated: true)

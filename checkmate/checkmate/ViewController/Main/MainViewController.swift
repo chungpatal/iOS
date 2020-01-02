@@ -13,15 +13,23 @@ class MainViewController: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     var categories: [Category] = [.all, .facility, .maintenance, .fire, .gas, .electronic, .elevator, .building]
     
-    @IBAction func search(
-        _ sender: Any) {
+    @IBAction func search(_ sender: Any) {
     }
+    
     @IBAction func addInfo(_ sender: Any) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let addVC = mainStoryboard.viewController(AddViewController.self)
+        addVC.modalPresentationStyle = .fullScreen
+        addVC.tableViewData = Category.allCases.map { (category) in
+            return ExpandCellData(opened: false, category: category, safetyGrade: .unknown, desc: "")
+        }
+        self.present(addVC, animated: true)
     }
+  
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationImage()
+        setNavigation()
         setCollectionView()
     }
 

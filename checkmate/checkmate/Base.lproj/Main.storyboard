@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ROZ-RC-rvM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UUr-g3-hHe">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
@@ -37,13 +37,13 @@
                                                     <rect key="frame" x="10" y="10" width="155" height="97"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="CIm-hQ-EOV">
-                                                            <rect key="frame" x="49.666666666666671" y="16.333333333333336" width="55.666666666666671" height="64.333333333333314"/>
+                                                            <rect key="frame" x="48.666666666666657" y="2.3333333333333357" width="58" height="92.333333333333314"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconAll" translatesAutoresizingMaskIntoConstraints="NO" id="ad4-hH-qCe">
-                                                                    <rect key="frame" x="13.333333333333336" y="0.0" width="29" height="28"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="58" height="56"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모아보기" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQc-W2-PKM">
-                                                                    <rect key="frame" x="0.0" y="45" width="55.666666666666664" height="19.333333333333329"/>
+                                                                    <rect key="frame" x="1" y="73" width="55.666666666666664" height="19.333333333333329"/>
                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
                                                                     <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -91,14 +91,14 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYa-Yy-2CK">
-                                <rect key="frame" x="304" y="741" width="93" height="93"/>
+                                <rect key="frame" x="211" y="648" width="186" height="186"/>
                                 <state key="normal" image="buttonFloating"/>
                                 <connections>
                                     <action selector="addInfo:" destination="bmp-nD-NaF" eventType="touchUpInside" id="e7l-iC-Sje"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m2g-NH-6w8">
-                                <rect key="frame" x="368" y="158" width="30" height="22"/>
+                                <rect key="frame" x="368" y="151" width="30" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="AsV-5x-4ab"/>
                                 </constraints>
@@ -127,7 +127,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oop-wc-0Il"/>
                     </view>
-                    <navigationItem key="navigationItem" title=" " id="lGh-At-eAh"/>
+                    <navigationItem key="navigationItem" title=" " id="lGh-At-eAh">
+                        <barButtonItem key="backBarButtonItem" title=" " id="35i-4v-eSw"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="PO0-I4-Il4" id="4lK-Ve-Myp"/>
                         <outlet property="searchTextField" destination="ZT9-PE-IED" id="0FK-d7-4EF"/>
@@ -497,6 +499,9 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krS-eG-0I5">
                                                             <rect key="frame" x="380.66666666666669" y="16.666666666666668" width="17.333333333333314" height="22.000000000000004"/>
                                                             <state key="normal" image="iconMap"/>
+                                                            <connections>
+                                                                <action selector="map:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DYD-hx-LcL"/>
+                                                            </connections>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqS-B1-sia">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="0.33333333333333331"/>
@@ -629,6 +634,9 @@
                                                         <constraint firstAttribute="width" constant="79" id="0D4-jZ-3dY"/>
                                                     </constraints>
                                                     <state key="normal" image="iconSujung"/>
+                                                    <connections>
+                                                        <action selector="editInfo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bFT-eU-8a3"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -680,7 +688,14 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="legalTownNameLabel" destination="SZ8-Ph-JTA" id="TkE-Gw-5aK"/>
+                        <outlet property="nameLabel" destination="Bzb-yR-cvH" id="hKC-EH-m3o"/>
+                        <outlet property="pkNumLabel" destination="K8f-ob-DZG" id="CMY-GB-FS4"/>
+                        <outlet property="realNumLabel" destination="hsg-b1-njI" id="DkR-xQ-KJa"/>
+                        <outlet property="safetyGradeLabel" destination="Thg-f2-03p" id="L5u-PM-4Xv"/>
+                        <outlet property="safetyGradeView" destination="agj-wG-uWs" id="z27-Hv-Fsq"/>
                         <outlet property="tableView" destination="d9j-tt-VEp" id="tej-99-BRy"/>
+                        <outlet property="useCategoryLabel" destination="10K-sp-gHi" id="RvO-Tz-bB1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -710,6 +725,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaY-e4-exo">
                                                 <rect key="frame" x="380.66666666666669" y="16.666666666666664" width="17.333333333333314" height="22"/>
                                                 <state key="normal" image="iconMap"/>
+                                                <connections>
+                                                    <action selector="map:" destination="EsK-oD-Ngr" eventType="touchUpInside" id="LGn-mE-ci7"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CgB-B4-wmo">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="0.33333333333333331"/>
@@ -842,6 +860,9 @@
                                             <constraint firstAttribute="width" constant="79" id="dbV-tE-tTC"/>
                                         </constraints>
                                         <state key="normal" image="iconSujung"/>
+                                        <connections>
+                                            <action selector="editInfo:" destination="EsK-oD-Ngr" eventType="touchUpInside" id="9yu-wu-0T0"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -898,6 +919,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5U4-jL-A5I"/>
                     </view>
+                    <connections>
+                        <outlet property="detailLabel" destination="KbD-Xs-JXG" id="sHa-3J-Jr7"/>
+                        <outlet property="legalTownNameLabel" destination="lmk-hZ-tzd" id="YCC-NY-Zeq"/>
+                        <outlet property="nameLabel" destination="fed-ud-sbE" id="Xpe-qk-hhP"/>
+                        <outlet property="pkNumLabel" destination="jvs-67-yfx" id="w3p-cQ-6LB"/>
+                        <outlet property="realNumLabel" destination="fYB-nD-YZQ" id="zdV-pM-V4e"/>
+                        <outlet property="safetyGradeLabel" destination="Igm-c5-LI4" id="hsV-S6-lH5"/>
+                        <outlet property="safetyGradeView" destination="brH-xf-rgv" id="5Et-kP-gNN"/>
+                        <outlet property="useCategoryLabel" destination="NEn-au-dWV" id="TaT-Ip-7GR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aij-0X-ouw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -917,6 +948,9 @@
                                     <navigationItem id="v7F-TL-l9c">
                                         <barButtonItem key="leftBarButtonItem" image="iconSearch" id="tdn-JZ-fBU">
                                             <color key="tintColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="cancel:" destination="ROZ-RC-rvM" id="oNJ-DN-tQk"/>
+                                            </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="완료" id="9Zw-MM-WiG">
                                             <color key="tintColor" red="0.69411764705882351" green="0.69411764705882351" blue="0.69411764705882351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -938,7 +972,7 @@
                                             <rect key="frame" x="16" y="38" width="382" height="48"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEa-Wp-t36">
-                                                    <rect key="frame" x="341" y="13" width="30" height="22"/>
+                                                    <rect key="frame" x="341" y="6" width="30" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="z6A-5x-Rkn"/>
                                                     </constraints>
@@ -1054,7 +1088,7 @@
                                             <rect key="frame" x="16" y="348" width="382" height="48"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Swx-cW-9XA">
-                                                    <rect key="frame" x="341" y="13" width="30" height="22"/>
+                                                    <rect key="frame" x="341" y="3" width="30" height="42"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="fNA-3R-Df7"/>
                                                     </constraints>
@@ -1160,6 +1194,7 @@
                         <outlet property="addressTextField" destination="28J-Kh-EEl" id="VAi-9R-uuk"/>
                         <outlet property="legalTownNameTextField" destination="PUL-V2-YvY" id="1SV-04-cYS"/>
                         <outlet property="nameTextField" destination="LMC-f1-8pF" id="eAR-HT-bo4"/>
+                        <outlet property="navigationBar" destination="Cp6-dr-Zu6" id="3nY-el-soc"/>
                         <outlet property="pkNumTextField" destination="ZsJ-Xy-1xz" id="7zz-Vr-g6g"/>
                         <outlet property="realNumTextField" destination="Pwa-Lq-FeX" id="pVP-rp-9j0"/>
                         <outlet property="tableView" destination="xme-ul-3Ng" id="USR-Ob-8rw"/>
@@ -1178,6 +1213,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="52j-6A-euk">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1191,7 +1227,7 @@
     </scenes>
     <resources>
         <image name="buttonFloating" width="93" height="93"/>
-        <image name="buttonaBack" width="9" height="15"/>
+        <image name="buttonaBack" width="12" height="21"/>
         <image name="iconAll" width="29" height="28"/>
         <image name="iconBlue" width="10" height="10"/>
         <image name="iconMap" width="17.333333969116211" height="21.333333969116211"/>

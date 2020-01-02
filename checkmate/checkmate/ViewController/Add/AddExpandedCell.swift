@@ -9,7 +9,6 @@
 import UIKit
 
 class AddExpandedCell: UITableViewCell, NibLoadable {
-    static let ID = "AddExpandedCell"
     var selectedGrade : SafetyGrade = .unknown
     var sectionIndex: Int?
     @IBOutlet weak var safeButton: RoundButton!

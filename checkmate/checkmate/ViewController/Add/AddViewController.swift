@@ -17,6 +17,8 @@ struct ExpandCellData {
 
 class AddViewController: UIViewController, NibLoadable {
     var tableViewData = [ExpandCellData]()
+    var selectedPlace: PlaceDetail?
+    var selectedCategory: Category?
     
     @IBOutlet var addressTextField: UITextField!
     @IBOutlet var nameTextField: UITextField!
@@ -25,30 +27,61 @@ class AddViewController: UIViewController, NibLoadable {
     @IBOutlet var pkNumTextField: UITextField!
     @IBOutlet var useCategoryTextField: UITextField!
     @IBOutlet var tableView: UITableView!
-    
+    @IBOutlet weak var navigationBar: UINavigationBar!
     override func viewDidLoad() {
         super.viewDidLoad()
-        registerTableViewCells()
+        setData()
+        setupUI()
         setupTableView()
-        setupInitData()
+        setNavigationBarImage()
     }
-
+    
+    func setNavigationBarImage() {
+        let logo = #imageLiteral(resourceName: "logo")
+        let imageView = UIImageView(image:logo)
+        navigationBar.topItem?.titleView = imageView
+    }
+    
     func registerTableViewCells() {
-        tableView.register(UINib(nibName: "AddExpandedCell", bundle: nil), forCellReuseIdentifier: AddExpandedCell.ID)
-        tableView.register(UINib(nibName: "ExpandableCell2", bundle: nil), forCellReuseIdentifier: ExpandableCell2.ID)
+        tableView.register(UINib(nibName: "AddExpandedCell", bundle: nil), forCellReuseIdentifier: AddExpandedCell.nibId)
+        tableView.register(UINib(nibName: "ExpandableCell2", bundle: nil), forCellReuseIdentifier: ExpandableCell2.nibId)
     }
-
+    
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        registerTableViewCells()
     }
     
-    func setupInitData() {
-        tableViewData = Category.allCases.map { (category) in
-            return ExpandCellData(opened: false, category: category, safetyGrade: .unknown, desc: "내용")
+    func setData() {
+        guard let selectedPlace = selectedPlace else {
+            return
         }
+        tableViewData = selectedPlace.detailInfo.map({ (detailInfo) in
+            var cellData = ExpandCellData(opened: false,
+                                          category: detailInfo.categoryIdx,
+                                          safetyGrade: detailInfo.grade,
+                                          desc: detailInfo.detail)
+            cellData.opened = detailInfo.categoryIdx == selectedCategory
+            return cellData
+        })
     }
-
+    
+    func setupUI() {
+        guard let selectedPlace = selectedPlace else {
+            return
+        }
+        nameTextField.text = selectedPlace.name
+        legalTownNameTextField.text = selectedPlace.legalName
+        realNumTextField.text = selectedPlace.num
+        useCategoryTextField.text = Category(rawValue: selectedPlace.useIdx)?.name
+        pkNumTextField.text = selectedPlace.pk
+    }
+    
+    @IBAction func cancel(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func done(_ sender: Any) {
         print("이름: \(nameTextField.text)")
         //todo child에 있는 내용물들 뽑아내기

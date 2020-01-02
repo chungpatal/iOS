@@ -38,6 +38,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="titleLabel" destination="j1u-M7-2qO" id="IdU-Vm-ha1"/>
+                <outlet property="titleLabelHeight" destination="Hm4-6H-yow" id="BvU-Dt-cbd"/>
             </connections>
             <point key="canvasLocation" x="-184.05797101449278" y="150"/>
         </tableViewCell>

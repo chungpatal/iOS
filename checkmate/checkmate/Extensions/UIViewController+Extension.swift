@@ -9,11 +9,13 @@
 import UIKit
 
 extension UIViewController {
-    func setNavigationImage() {
+    func setNavigation() {
         let logo = #imageLiteral(resourceName: "logo")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
-        
+        self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "buttonaBack")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "buttonaBack")
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 }
 
