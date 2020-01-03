@@ -20,7 +20,7 @@ class MapViewController: UIViewController, MTMapViewDelegate {
         mapView?.delegate = self
     
         if let mapView = mapView {
-            view.addSubview(mapView)
+            //view.addSubview(mapView) //todo 풀기
             showCustosmMarker()
         }
     }
@@ -39,10 +39,10 @@ class MapViewController: UIViewController, MTMapViewDelegate {
 
     func showCustosmMarker() {
         poiItem = MTMapPOIItem()
-        poiItem?.itemName = "창강 빌딩"
+        poiItem?.itemName = "태영 빌딩"
         poiItem?.markerType = .customImage
         poiItem?.customImageName = "iconMap"
-        let point = MTMapPointGeo(latitude: 37.542734, longitude: 126.950543)
+        let point = MTMapPointGeo(latitude: 37.5469097, longitude: 126.9536868)
         poiItem?.mapPoint = MTMapPoint(geoCoord: point)
         poiItem?.showAnimationType = .springFromGround
         poiItem?.customImageAnchorPointOffset = MTMapImageOffset(offsetX: 30, offsetY: 0)

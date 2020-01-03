@@ -19,9 +19,11 @@ class MainViewController: UIViewController {
     @IBAction func addInfo(_ sender: Any) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let addVC = mainStoryboard.viewController(AddViewController.self)
-        addVC.tableViewData = Category.allCases.map { (category) in
+        var categories = Category.allCases.map { (category) in
             return ExpandCellData(opened: false, category: category, safetyGrade: .unknown, desc: "")
         }
+        categories.remove(at: 0)
+        addVC.tableViewData = categories
         let navi = UINavigationController(rootViewController: addVC)
         navi.modalPresentationStyle = .fullScreen
         navi.navigationBar.tintColor = #colorLiteral(red: 0.3321701288, green: 0.3321786821, blue: 0.3321741223, alpha: 1)

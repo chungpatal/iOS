@@ -1773,6 +1773,7 @@
 					"$(PROJECT_DIR)/checkmate/IOS_DaumMap_SDK_1.4.0/lib/DaumMap.embeddedframework",
 				);
 				INFOPLIST_FILE = checkmate/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1798,6 +1799,7 @@
 					"$(PROJECT_DIR)/checkmate/IOS_DaumMap_SDK_1.4.0/lib/DaumMap.embeddedframework",
 				);
 				INFOPLIST_FILE = checkmate/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

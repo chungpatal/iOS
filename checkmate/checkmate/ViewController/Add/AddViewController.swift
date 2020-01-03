@@ -59,7 +59,7 @@ class AddViewController: UIViewController, NibLoadable {
     //todo 야매 지우기
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        addressTextField.text = "도화길 29-1"
+        addressTextField.text = "마포대로8길 9"
     }
     
     @IBAction func search(_ sender: Any) {
