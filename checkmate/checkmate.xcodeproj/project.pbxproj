@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,6 +30,13 @@
 		3BADDCB323BE0EE50083F75A /* ExpandableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADDCB223BE0EE50083F75A /* ExpandableCell.swift */; };
 		3BADDCB523BE0EFA0083F75A /* ExpandedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADDCB423BE0EFA0083F75A /* ExpandedCell.swift */; };
 		3BADDCB923BE0FC50083F75A /* AddExpandedCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADDCB823BE0FC50083F75A /* AddExpandedCellDelegate.swift */; };
+		3BB0FD7023CB08AA0032DEE9 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB0FD6F23CB08AA0032DEE9 /* NetworkResult.swift */; };
+		3BB0FD7223CB08BB0032DEE9 /* CheckmateAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB0FD7123CB08BB0032DEE9 /* CheckmateAPI.swift */; };
+		3BB0FD7423CB14FD0032DEE9 /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB0FD7323CB14FD0032DEE9 /* Networkable.swift */; };
+		3BB0FD7623CB15100032DEE9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB0FD7523CB15100032DEE9 /* NetworkManager.swift */; };
+		3BB0FD7823CB1B5C0032DEE9 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB0FD7723CB1B5C0032DEE9 /* Default.swift */; };
+		3BB0FD7A23CB1F460032DEE9 /* UIPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB0FD7923CB1F460032DEE9 /* UIPresentable.swift */; };
+		3BB0FD7C23CB1F4C0032DEE9 /* AlertUsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB0FD7B23CB1F4C0032DEE9 /* AlertUsable.swift */; };
 		3BCB7A4623BCDA2D0082B5AA /* PlaceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCB7A4523BCDA2D0082B5AA /* PlaceDetail.swift */; };
 		3BCB7A4823BCDD7D0082B5AA /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCB7A4723BCDD7D0082B5AA /* Place.swift */; };
 		3BCB7A4D23BCE0C00082B5AA /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCB7A4C23BCE0C00082B5AA /* String+Extension.swift */; };
@@ -351,6 +358,13 @@
 		3BADDCB223BE0EE50083F75A /* ExpandableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableCell.swift; sourceTree = "<group>"; };
 		3BADDCB423BE0EFA0083F75A /* ExpandedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedCell.swift; sourceTree = "<group>"; };
 		3BADDCB823BE0FC50083F75A /* AddExpandedCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpandedCellDelegate.swift; sourceTree = "<group>"; };
+		3BB0FD6F23CB08AA0032DEE9 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		3BB0FD7123CB08BB0032DEE9 /* CheckmateAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmateAPI.swift; sourceTree = "<group>"; };
+		3BB0FD7323CB14FD0032DEE9 /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
+		3BB0FD7523CB15100032DEE9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		3BB0FD7723CB1B5C0032DEE9 /* Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
+		3BB0FD7923CB1F460032DEE9 /* UIPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPresentable.swift; sourceTree = "<group>"; };
+		3BB0FD7B23CB1F4C0032DEE9 /* AlertUsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUsable.swift; sourceTree = "<group>"; };
 		3BCB7A4523BCDA2D0082B5AA /* PlaceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetail.swift; sourceTree = "<group>"; };
 		3BCB7A4723BCDD7D0082B5AA /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		3BCB7A4C23BCE0C00082B5AA /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -759,11 +773,33 @@
 			path = SearchPlace;
 			sourceTree = "<group>";
 		};
+		3BB0FD6C23CB070B0032DEE9 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3BE014D723BC95A100EB89D3 /* NibLoadable.swift */,
+				3BB0FD7923CB1F460032DEE9 /* UIPresentable.swift */,
+				3BB0FD7B23CB1F4C0032DEE9 /* AlertUsable.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		3BB0FD6D23CB070E0032DEE9 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				3BB0FD6F23CB08AA0032DEE9 /* NetworkResult.swift */,
+				3BB0FD7123CB08BB0032DEE9 /* CheckmateAPI.swift */,
+				3BB0FD7323CB14FD0032DEE9 /* Networkable.swift */,
+				3BB0FD7523CB15100032DEE9 /* NetworkManager.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		3BCB7A4923BCDDA10082B5AA /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				3BCB7A4723BCDD7D0082B5AA /* Place.swift */,
 				3BCB7A4523BCDA2D0082B5AA /* PlaceDetail.swift */,
+				3BB0FD7723CB1B5C0032DEE9 /* Default.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -817,17 +853,18 @@
 			isa = PBXGroup;
 			children = (
 				3BE29F6C23BE55A00025C2A6 /* IOS_DaumMap_SDK_1.4.0 */,
+				3BB0FD6D23CB070E0032DEE9 /* Networking */,
+				3BB0FD6C23CB070B0032DEE9 /* Common */,
 				3B48B1B423BCFFE700E1EE85 /* Layout */,
 				3BCB7A4B23BCE0AD0082B5AA /* Extensions */,
-				3BCB7A4A23BCDDA50082B5AA /* ViewController */,
 				3BCB7A4923BCDDA10082B5AA /* Models */,
+				3BCB7A4A23BCDDA50082B5AA /* ViewController */,
 				3BE014C123BC915D00EB89D3 /* AppDelegate.swift */,
 				3BE014C323BC915D00EB89D3 /* SceneDelegate.swift */,
 				3BE014C723BC915D00EB89D3 /* Main.storyboard */,
 				3BE014CA23BC915E00EB89D3 /* Assets.xcassets */,
 				3BE014CC23BC915E00EB89D3 /* LaunchScreen.storyboard */,
 				3BE014CF23BC915E00EB89D3 /* Info.plist */,
-				3BE014D723BC95A100EB89D3 /* NibLoadable.swift */,
 				3BE2A1AC23BE57D50025C2A6 /* Header.h */,
 			);
 			path = checkmate;
@@ -1229,6 +1266,7 @@
 				3BE014BA23BC915D00EB89D3 /* Sources */,
 				3BE014BB23BC915D00EB89D3 /* Frameworks */,
 				3BE014BC23BC915D00EB89D3 /* Resources */,
+				45783CDCDDCD61A9A251A0BD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1561,6 +1599,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		45783CDCDDCD61A9A251A0BD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-checkmate/Pods-checkmate-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-checkmate/Pods-checkmate-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-checkmate/Pods-checkmate-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		47C82FB4F7F46C33E4A88AEE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1591,7 +1646,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B13CA2C23BD4501008C7994 /* RoundButton.swift in Sources */,
+				3BB0FD7823CB1B5C0032DEE9 /* Default.swift in Sources */,
 				3BADDCB923BE0FC50083F75A /* AddExpandedCellDelegate.swift in Sources */,
+				3BB0FD7423CB14FD0032DEE9 /* Networkable.swift in Sources */,
 				3B48B1B623BCFFF300E1EE85 /* CategoryLayout.swift in Sources */,
 				3B48B1B123BCFF2300E1EE85 /* PlaceListTableViewCell.swift in Sources */,
 				3B13CA2223BD3B24008C7994 /* AddViewController.swift in Sources */,
@@ -1604,18 +1661,23 @@
 				3BCB7A4D23BCE0C00082B5AA /* String+Extension.swift in Sources */,
 				3B13CA1D23BD311C008C7994 /* UIViewController+Extension.swift in Sources */,
 				3B50A99623BE983400BCBBF6 /* SampleData.swift in Sources */,
+				3BB0FD7C23CB1F4C0032DEE9 /* AlertUsable.swift in Sources */,
 				3B48B1A823BCF7A800E1EE85 /* SpecificDetailViewController.swift in Sources */,
 				3BE014C223BC915D00EB89D3 /* AppDelegate.swift in Sources */,
+				3BB0FD7623CB15100032DEE9 /* NetworkManager.swift in Sources */,
 				3B48B1AA23BCF7F000E1EE85 /* Storyboard+Extension.swift in Sources */,
 				3BE014C423BC915D00EB89D3 /* SceneDelegate.swift in Sources */,
 				3BCB7A4823BCDD7D0082B5AA /* Place.swift in Sources */,
 				3BADDCB523BE0EFA0083F75A /* ExpandedCell.swift in Sources */,
 				3B50A99923BEA7ED00BCBBF6 /* SearchPlaceViewController.swift in Sources */,
 				3B48B19D23BCF0C600E1EE85 /* MainCollectionViewCell.swift in Sources */,
+				3BB0FD7A23CB1F460032DEE9 /* UIPresentable.swift in Sources */,
 				3B13CA2A23BD428B008C7994 /* AddExpandedCell.swift in Sources */,
+				3BB0FD7023CB08AA0032DEE9 /* NetworkResult.swift in Sources */,
 				3BCB7A4623BCDA2D0082B5AA /* PlaceDetail.swift in Sources */,
 				3BE014D823BC95A100EB89D3 /* NibLoadable.swift in Sources */,
 				3BE2A1B223BE87FC0025C2A6 /* SearchViewController.swift in Sources */,
+				3BB0FD7223CB08BB0032DEE9 /* CheckmateAPI.swift in Sources */,
 				3BE2A1AE23BE58300025C2A6 /* MapViewController.swift in Sources */,
 				3B13CA1F23BD31E3008C7994 /* AllDetailViewController.swift in Sources */,
 				3BE014D623BC94EC00EB89D3 /* UITableView+Extension.swift in Sources */,
