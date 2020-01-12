@@ -8,14 +8,15 @@
 
 import UIKit
 
-struct PlaceInfoModel: Codable {
+struct PlaceModel: Codable {
     let message: String
     let data: [Place]
 }
 
 struct Place: Codable {
     let placeIdx: Int
-    let name, pk, info: String
+    let name: String?
+    let pk, info: String
     let grade: SafetyGrade
 
     enum CodingKeys: String, CodingKey {
@@ -26,10 +27,10 @@ struct Place: Codable {
 
 
 enum SafetyGrade: Int, Codable {
-    case safe = 0
+    case danger = 0
     case warn = 1
-    case danger = 2
-    case unknown = 3
+    case safe = 2
+    case unknown = 3 //zerotodo 언논으로 보내는게 아니라 아예 안보내버림
     
     var rawVal: Int {
         return self.rawValue

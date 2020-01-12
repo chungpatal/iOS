@@ -16,6 +16,7 @@ struct ExpandCellData {
 }
 
 class AddViewController: UIViewController, NibLoadable {
+    //todo 키보드 처리
     var tableViewData = [ExpandCellData]()
     var selectedPlace: PlaceDetail?
     var selectedCategory: Category?
@@ -34,8 +35,7 @@ class AddViewController: UIViewController, NibLoadable {
         picker.dataSource = self
         return picker
     }()
-    private var pickerData: [String] = []
-    
+    private var pickerData: [PlaceUsage] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -55,16 +55,11 @@ class AddViewController: UIViewController, NibLoadable {
         super.viewWillDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
     }
-    
-    //todo 야매 지우기
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        addressTextField.text = "마포대로8길 9"
-    }
-    
+
     @IBAction func search(_ sender: Any) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let searchListVC = mainStoryboard.viewController(SearchViewController.self)
+        let searchListVC = mainStoryboard.viewController(SearchAddressViewController.self)
+        searchListVC.delegate = self
         self.show(searchListVC, sender: nil)
     }
     
@@ -86,9 +81,9 @@ class AddViewController: UIViewController, NibLoadable {
     }
     
     func setData() {
-        pickerData = PlaceUsage.allCases.map({
-            return $0.name
-        })
+        //picker
+        pickerData = PlaceUsage.allCases
+        //tableView
         guard let selectedPlace = selectedPlace else {
             return
         }
@@ -112,7 +107,7 @@ class AddViewController: UIViewController, NibLoadable {
         legalTownNameTextField.text = selectedPlace.legalName
         realNumTextField.text = selectedPlace.num
         pkNumTextField.text = selectedPlace.pk
-        useCategoryTextField.text = PlaceUsage(rawValue: selectedPlace.useIdx)?.name
+        useCategoryTextField.text = selectedPlace.useIdx.name
     }
     
     @IBAction func cancel(_ sender: Any) {
@@ -120,14 +115,7 @@ class AddViewController: UIViewController, NibLoadable {
     }
     
     @IBAction func done(_ sender: Any) {
-        print("이름: \(nameTextField.text)")
-        for (sectionIndex, _) in tableViewData.enumerated() {
-            let sectionData = tableViewData[sectionIndex]
-            print(sectionData.desc)
-            print(sectionData.category.name)
-            print(sectionData.safetyGrade.rawVal)
-        }
-        self.dismiss(animated: true, completion: nil)
+        addPlace(selectedPlace: selectedPlace)
     }
 }
 
@@ -210,11 +198,69 @@ extension AddViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
+        return pickerData[row].name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        useCategoryTextField.text = pickerData[row]
+        useCategoryTextField.text = pickerData[row].name
         self.view.endEditing(true)
+    }
+}
+
+extension AddViewController: AddressDelegate {
+    func selectPlace(name: String) {
+        addressTextField.text = name
+    }
+}
+
+// MARK: Network
+extension AddViewController: AlertUsable {
+    func addPlace(selectedPlace: PlaceDetail?) {
+        var detailInfo: [DetailInfo] = []
+        for (sectionIndex, _) in tableViewData.enumerated() {
+            let sectionData = tableViewData[sectionIndex]
+            if sectionData.safetyGrade == .unknown {
+                continue
+            }
+            let categoryDetailInfo = DetailInfo(categoryIdx: sectionData.category,
+                                                grade: sectionData.safetyGrade,
+                                                detail: sectionData.desc)
+            detailInfo.append(categoryDetailInfo)
+        }
+        var newPlace = PlaceDetail(placeIdx: -1,
+                                   name: nameTextField.text,
+                                   address: addressTextField.text,
+                                   totalGrade: SafetyGrade.safe,
+                                   legalName: legalTownNameTextField.text ?? "",
+                                   num: realNumTextField.text ?? "",
+                                   useIdx: pickerData[pickerView.selectedRow(inComponent: 0)],
+                                   pk: pkNumTextField.text ?? "",
+                                   long: nil,
+                                   lat: nil,
+                                   detailInfo: detailInfo)
+        if let selectedPlace = selectedPlace {
+            //put
+            newPlace.placeIdx = selectedPlace.placeIdx
+            NetworkManager.sharedInstance.editPlace(place: newPlace) { [weak self] (res) in
+                guard let self = self else { return }
+                switch res {
+                case .success(_):
+                    self.dismiss(animated: true, completion: nil)
+                case .failure(let type):
+                    self.showErrorAlert(errorType: type)
+                }
+            }
+        } else {
+            //post
+            NetworkManager.sharedInstance.addPlace(place: newPlace) { [weak self] (res) in
+                guard let self = self else { return }
+                switch res {
+                case .success(_):
+                    self.dismiss(animated: true, completion: nil)
+                case .failure(let type):
+                    self.showErrorAlert(errorType: type)
+                }
+            }
+        }
     }
 }

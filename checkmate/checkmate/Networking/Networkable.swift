@@ -15,7 +15,7 @@ protocol Networkable {
     func getPlaceDetail(placeIdx: Int, completion: @escaping (Result<PlaceDetail, NetworkError>) -> Void)
     func addPlace(place: PlaceDetail, completion: @escaping (Result<String, NetworkError>) -> Void)
     func editPlace(place: PlaceDetail, completion: @escaping (Result<String, NetworkError>) -> Void)
-    func searchPlace(keyworkd: String, completion: @escaping (Result<[Place], NetworkError>) -> Void)
+    func searchPlace(keyword: String, completion: @escaping (Result<[Place], NetworkError>) -> Void)
 }
 
 extension Networkable {
@@ -32,10 +32,11 @@ extension Networkable {
                     completion(.failure(.decodeError))
                 }
             case let .failure(err) :
-                if let error = err as NSError?, error.code == -1009 {
+                let statusCode = err.response?.statusCode ?? 0
+                if statusCode == -1009 {
                     completion(.failure(.networkConnectFail))
                 } else {
-                    completion(.failure(.networkError((1, err.localizedDescription)))) //todo 여기 rescode
+                    completion(.failure(.networkError((statusCode, err.localizedDescription))))
                 }
             }
         }

@@ -20,15 +20,12 @@ enum CheckmateAPI {
     case editPlace(place: PlaceDetail)
     //검색
     case searchPlace(keyword: String)
-    
-    //todo
-    //주소 검색
-    //지도 가기
+    //todo 주소 검색 api
 }
 
 extension CheckmateAPI: TargetType {
     var baseURL: URL {
-        guard let url = URL(string: "http://13.125.105.66:3000") else {
+        guard let url = URL(string: "http://15.165.96.154:3000") else {
             fatalError("base url could not be configured")
         }
         return url
@@ -71,13 +68,19 @@ extension CheckmateAPI: TargetType {
             let parameters: [String: Any] = ["p": keyword]
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         case .addPlace(let place):
+            let detailInfo = place.detailInfo.map { detailInfo -> [String : Any] in
+                let editedInfo: [String: Any] = ["category_idx": detailInfo.categoryIdx.rawVal,
+                                        "grade": detailInfo.grade.rawVal,
+                                        "detail":detailInfo.detail]
+                return editedInfo
+            }
             let parameters: [String: Any] = ["name": place.name ?? "",
                                              "address": place.address ?? "",
                                              "legal_name": place.legalName,
                                              "num": place.num,
                                              "pk": place.pk,
-                                             "use_idx": place.useIdx,
-                                             "detail_info": place.detailInfo]
+                                             "use_idx": place.useIdx.rawVal,
+                                             "detail_info": detailInfo]
              return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         case .editPlace(let place):
             let parameters: [String: Any] = ["place_idx": place.placeIdx,
@@ -86,7 +89,7 @@ extension CheckmateAPI: TargetType {
                                              "legal_name": place.legalName,
                                              "num": place.num,
                                              "pk": place.pk,
-                                             "use_idx": place.useIdx,
+                                             "use_idx": place.useIdx.rawVal,
                                              "detail_info": place.detailInfo]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }

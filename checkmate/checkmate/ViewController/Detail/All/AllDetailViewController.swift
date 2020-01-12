@@ -19,47 +19,44 @@ class AllDetailViewController: UIViewController, NibLoadable {
     @IBOutlet weak var pkNumLabel: UILabel!
     @IBOutlet var tableView: UITableView!
 
-    var selectedPlace: PlaceDetail?
+    var selectedPlaceIdx: Int?
+    var selectedPlace: PlaceDetail? {
+        didSet {
+            if let selectedPlace = selectedPlace {
+                self.setupUI(selectedPlace: selectedPlace)
+            }
+        }
+    }
     var tableViewData = [ExpandCellData]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let selectedPlaceIdx = selectedPlaceIdx  {
+            getPlaceDetail(selectedPlaceIdx: selectedPlaceIdx)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTableView()
         self.setNavigation()
-        self.setupUI()
-        self.setupData()
+        self.setupTableViewData()
     }
     
-    //todo 지우기 - 엄청야매
-    override func viewDidDisappear(_ animated: Bool) {
-        selectedPlace?.detailInfo[Category.gas.rawVal-1].grade = .warn
-        selectedPlace?.detailInfo[Category.gas.rawVal-1].detail =
-        """
-        최종 검사일: 20200103
-        검사일: 20200103
-        검사 결과명: 조건부합격
-        """
-        setupData()
-        tableView.reloadData()
-    }
-    
-    func setupUI() {
-        guard let selectedPlace = selectedPlace else {
-            return
-        }
+    func setupUI(selectedPlace: PlaceDetail) {
         nameLabel.text = selectedPlace.name
         safetyGradeView.image = selectedPlace.totalGrade.colorImage
         safetyGradeLabel.text = selectedPlace.totalGrade.name
         legalTownNameLabel.text = selectedPlace.legalName
         realNumLabel.text = selectedPlace.num
-        useCategoryLabel.text = PlaceUsage(rawValue: selectedPlace.useIdx)?.name
+        useCategoryLabel.text = selectedPlace.useIdx.name
         pkNumLabel.text = selectedPlace.pk
     }
     
-    func setupData() {
+    func setupTableViewData() {
         guard let selectedPlace = selectedPlace else {
             return
         }
+        //todo 여기서 안나오는것들이 있을텐데 unkown으로 추가해줘야하는 상황이지~
         tableViewData = selectedPlace.detailInfo.map({ (detailInfo) in
             return ExpandCellData(opened: false,
                                   category: detailInfo.categoryIdx,
@@ -78,7 +75,14 @@ class AllDetailViewController: UIViewController, NibLoadable {
         self.present(navi, animated: true)
     }
     @IBAction func map(_ sender: Any) {
-        
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let lat = selectedPlace?.lat, let long = selectedPlace?.long else {
+            self.showSimpleAlert(title: "해당 위치를 찾을 수 없습니다", message: "")
+            return
+        }
+        let mapVC = mainStoryboard.viewController(MapViewController.self)
+        mapVC.geo = (lat, long)
+        self.show(mapVC, sender: nil)
     }
     
     func setupTableView() {
@@ -146,3 +150,17 @@ extension AllDetailViewController : UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+// MARK: Network
+extension AllDetailViewController: AlertUsable {
+    func getPlaceDetail(selectedPlaceIdx: Int) {
+        NetworkManager.sharedInstance.getPlaceDetail(placeIdx: selectedPlaceIdx) { [weak self] (res) in
+            guard let self = self else { return }
+            switch res {
+            case .success(let data):
+                self.selectedPlace = data
+            case .failure(let type):
+                self.showErrorAlert(errorType: type)
+            }
+        }
+    }
+}

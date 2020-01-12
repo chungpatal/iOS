@@ -9,11 +9,15 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    //todo 키보드 처리
     @IBOutlet weak var searchTextField: UITextField!
     var categories: [Category] = [.all, .facility, .maintenance, .fire, .gas, .electronic, .elevator, .building]
     
     @IBAction func search(_ sender: Any) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let searchPlaceVC = mainStoryboard.viewController(SearchPlaceViewController.self)
+        searchPlaceVC.keyword = searchTextField.text
+        self.navigationController?.pushViewController(searchPlaceVC, animated: true)
     }
     
     @IBAction func addInfo(_ sender: Any) {

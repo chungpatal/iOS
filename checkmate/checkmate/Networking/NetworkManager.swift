@@ -26,7 +26,6 @@ struct NetworkManager: Networkable {
 }
 
 extension NetworkManager {
-    //todo .failure부분 통일
     func getPlaceList(categoryIdx: Int, completion: @escaping (Result<[Place], NetworkError>) -> Void) {
         fetchData(api: .placeList(categoryIdx: categoryIdx), networkData: PlaceModel.self) { (result) in
             switch result {
@@ -37,9 +36,6 @@ extension NetworkManager {
             }
         }
     }
-    
-    
-    
     func getPlaceDetail(placeIdx: Int, completion: @escaping (Result<PlaceDetail, NetworkError>) -> Void) {
         fetchData(api: .placeDetail(placeIdx: placeIdx), networkData: PlaceDetailModel.self) { (result) in
             switch result {
@@ -50,7 +46,6 @@ extension NetworkManager {
             }
         }
     }
-    
     func addPlace(place: PlaceDetail, completion: @escaping (Result<String, NetworkError>) -> Void) {
         fetchData(api: .addPlace(place: place), networkData: DefaultModel.self) { (result) in
             switch result {
@@ -61,7 +56,6 @@ extension NetworkManager {
             }
         }
     }
-    
     func editPlace(place: PlaceDetail, completion: @escaping (Result<String, NetworkError>) -> Void) {
         fetchData(api: .editPlace(place: place), networkData: DefaultModel.self) { (result) in
             switch result {
@@ -72,8 +66,8 @@ extension NetworkManager {
             }
         }
     }
-    func searchPlace(keyworkd: String, completion: @escaping (Result<[Place], NetworkError>) -> Void) {
-        fetchData(api: .searchPlace(keyword: keyworkd), networkData: PlaceModel.self) { (result) in
+    func searchPlace(keyword: String, completion: @escaping (Result<[Place], NetworkError>) -> Void) {
+        fetchData(api: .searchPlace(keyword: keyword), networkData: PlaceModel.self) { (result) in
             switch result {
             case .success(let successResult):
                 completion(.success(successResult.resResult.data))

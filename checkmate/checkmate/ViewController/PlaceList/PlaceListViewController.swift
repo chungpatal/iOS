@@ -16,88 +16,58 @@ class PlaceListViewController: UIViewController, NibLoadable {
     @IBOutlet weak var lowOrderButton: UIButton!
     var selectedCategory: Category? {
         didSet {
-            sortPlaces()
+            if let selectedCategory = selectedCategory {
+                getPlaceList(selectedCategory: selectedCategory)
+            }
         }
     }
-    var selectedCategoryRow: Int = 0
-    var isOrderHigh = Bool() {
+
+    var order: Order = .high {
         didSet {
-            sortPlaces()
+            places = sortPlacesOrder(places: places, by: order)
         }
     }
-    var places: [PlaceDetail] = [] {
+    
+    var places: [Place] = [] {
         didSet {
             self.tableView?.reloadData()
         }
     }
+    
     var categories: [Category] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setCollectionViewLayout()
         setCollectionView()
         setTableView()
         selectInitialCategory()
         setNavigation()
-        places = corePlace //todo delete
-        isOrderHigh = true
-    }
-    
-    func sortPlaces() {
-        //sort
-        if selectedCategory == .all {
-            if isOrderHigh {
-                places.sort {
-                    if $0.totalGrade == .unknown {
-                        return false
-                    }
-                    return $0.totalGrade.rawVal < $1.totalGrade.rawVal
-                }
-            } else {
-                places.sort {
-                    if $0.totalGrade == .unknown {
-                        return false
-                    }
-                    return $0.totalGrade.rawVal > $1.totalGrade.rawVal
-                }
-            }
-        } else {
-            if isOrderHigh {
-                places.sort {
-                    let categoryGrade1 = $0.detailInfo.filter { (detailInfo) in
-                        return detailInfo.categoryIdx == selectedCategory
-                    }.first?.grade
-                    let categoryGrade2 = $1.detailInfo.filter { (detailInfo) in
-                        return detailInfo.categoryIdx == selectedCategory
-                    }.first?.grade
-                    if categoryGrade1 == .unknown {
-                        return false
-                    }
-                    return categoryGrade1?.rawVal ?? 0 < categoryGrade2?.rawVal ?? 0
-                }
-            } else {
-                places.sort {
-                    let categoryGrade1 = $0.detailInfo.filter { (detailInfo) in
-                        return detailInfo.categoryIdx == selectedCategory
-                    }.first?.grade
-                    let categoryGrade2 = $1.detailInfo.filter { (detailInfo) in
-                        return detailInfo.categoryIdx == selectedCategory
-                    }.first?.grade
-                    if categoryGrade1 == .unknown {
-                        return false
-                    }
-                    return categoryGrade1?.rawVal ?? 0 > categoryGrade2?.rawVal ?? 0
-                }
-            }
+        if let selectedCategory = selectedCategory {
+            getPlaceList(selectedCategory: selectedCategory)
         }
     }
     
+    func sortPlacesOrder(places: [Place], by order: Order) -> [Place] {
+        var places = places
+        if order == .high {
+            places.sort {
+                return $0.grade.rawVal > $1.grade.rawVal
+            }
+        } else {
+            places.sort {
+                return $0.grade.rawVal < $1.grade.rawVal
+            }
+        }
+        return places
+    }
+    
     func selectInitialCategory() {
-        self.collectionView.selectItem(at: IndexPath(item: selectedCategory?.rawVal ?? 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+        self.collectionView.selectItem(at: IndexPath(item: selectedCategory?.rawVal ?? 0, section: 0), animated: true, scrollPosition: .centeredHorizontally) //todo 이때도 didselectrow 눌리나 확인. 되면 viewdidload에서 되는거 지워도 됨
     }
     func setCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        setCollectionViewLayout()
     }
     func setTableView() {
         tableView?.delegate = self
@@ -109,19 +79,18 @@ class PlaceListViewController: UIViewController, NibLoadable {
         }
     }
     @IBAction func highOrder(_ sender: Any) {
-        isOrderHigh = true
+        order = .high
         highOrderButton.setTitleColor(#colorLiteral(red: 0, green: 0.462745098, blue: 1, alpha: 1), for: .normal)
         lowOrderButton.setTitleColor(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1), for: .normal)
-        
     }
     @IBAction func lowOrder(_ sender: Any) {
-        isOrderHigh = false
+        order = .low
         lowOrderButton.setTitleColor(#colorLiteral(red: 0, green: 0.462745098, blue: 1, alpha: 1), for: .normal)
         highOrderButton.setTitleColor(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1), for: .normal)
     }
 }
 
-
+// MARK: CollectionView
 extension PlaceListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
@@ -137,6 +106,7 @@ extension PlaceListViewController: UICollectionViewDelegate, UICollectionViewDat
     }
 }
 
+// MARK: CollectionViewLayOutDelegate
 extension PlaceListViewController: CategoryLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         widthForCategoryAtIndexPath indexPath: IndexPath) -> CGFloat {
@@ -144,6 +114,7 @@ extension PlaceListViewController: CategoryLayoutDelegate {
     }
 }
 
+// MARK: TableView
 extension PlaceListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return places.count
@@ -163,14 +134,29 @@ extension PlaceListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         if selectedCategory == .all {
             let allDetailVC = mainStoryboard.viewController(AllDetailViewController.self)
-            allDetailVC.selectedPlace = places[indexPath.row]
+            allDetailVC.selectedPlaceIdx = places[indexPath.row].placeIdx
             self.show(allDetailVC, sender: nil)
         } else {
             let specificDetailVC = mainStoryboard.viewController(SpecificDetailViewController.self)
             specificDetailVC.selectedCategory = selectedCategory
-            specificDetailVC.selectedPlace = places[indexPath.row]
+            specificDetailVC.selectedPlaceIdx = places[indexPath.row].placeIdx
             self.show(specificDetailVC, sender: nil)
         }
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+// MARK: Network
+extension PlaceListViewController: AlertUsable {
+    func getPlaceList(selectedCategory: Category) {
+        NetworkManager.sharedInstance.getPlaceList(categoryIdx: selectedCategory.rawVal) { [weak self] (res) in
+            guard let self = self else { return }
+            switch res {
+            case .success(let data):
+                self.places = self.sortPlacesOrder(places: data, by: self.order)
+            case .failure(let type):
+                self.showErrorAlert(errorType: type)
+            }
+        }
     }
 }

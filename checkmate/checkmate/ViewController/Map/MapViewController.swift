@@ -8,9 +8,10 @@
 
 import UIKit
 
-class MapViewController: UIViewController, MTMapViewDelegate {
+class MapViewController: UIViewController, MTMapViewDelegate, NibLoadable {
     private var mapView: MTMapView?
     private var poiItem: MTMapPOIItem?
+    var geo: (lat: Double, long: Double)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +21,10 @@ class MapViewController: UIViewController, MTMapViewDelegate {
         mapView?.delegate = self
     
         if let mapView = mapView {
-            //view.addSubview(mapView) //todo 풀기
-            showCustosmMarker()
+            view.addSubview(mapView)
+            if let geo = geo {
+                showCustosmMarker(geo: geo)
+            }
         }
     }
     
@@ -37,12 +40,12 @@ class MapViewController: UIViewController, MTMapViewDelegate {
 //        mapView?.fitArea(toShowMapPoints: [poiItem1?.mapPoint])
 //    }
 
-    func showCustosmMarker() {
+    func showCustosmMarker(geo: (lat: Double, long: Double)) {
         poiItem = MTMapPOIItem()
         poiItem?.itemName = "태영 빌딩"
         poiItem?.markerType = .customImage
         poiItem?.customImageName = "iconMap"
-        let point = MTMapPointGeo(latitude: 37.5469097, longitude: 126.9536868)
+        let point = MTMapPointGeo(latitude: geo.lat, longitude: geo.long)
         poiItem?.mapPoint = MTMapPoint(geoCoord: point)
         poiItem?.showAnimationType = .springFromGround
         poiItem?.customImageAnchorPointOffset = MTMapImageOffset(offsetX: 30, offsetY: 0)

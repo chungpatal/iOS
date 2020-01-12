@@ -14,24 +14,28 @@ struct PlaceDetailModel: Codable {
 }
 
 struct PlaceDetail: Codable {
-    let placeIdx: Int
-    let name: String
-    let address: String
+    var placeIdx: Int
+    let name: String?
+    let address: String?
     let totalGrade: SafetyGrade
     let legalName, num: String
-    let useIdx: Int
+    let useIdx: PlaceUsage
     let pk: String
+    let long: Double?
+    let lat: Double?
     var detailInfo: [DetailInfo]
 
     enum CodingKeys: String, CodingKey {
         case placeIdx = "place_idx"
         case name
         case address
-        case totalGrade = "total_grade"
+        case totalGrade = "grade"
         case legalName = "legal_name"
         case num
         case useIdx = "use_idx"
         case pk
+        case long
+        case lat
         case detailInfo = "detail_info"
     }
 }
@@ -85,6 +89,10 @@ enum PlaceUsage:Int, Codable, CaseIterable {
         @unknown default:
             return ""
         }
+    }
+    
+    var rawVal: Int {
+        return self.rawValue
     }
     
 }
