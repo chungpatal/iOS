@@ -15,7 +15,7 @@ struct PlaceModel: Codable {
 
 struct Place: Codable {
     let placeIdx: Int
-    let name: String?
+    var name: String?
     let pk, info: String
     let grade: SafetyGrade
 
@@ -30,7 +30,7 @@ enum SafetyGrade: Int, Codable {
     case danger = 0
     case warn = 1
     case safe = 2
-    case unknown = 3 //zerotodo 언논으로 보내는게 아니라 아예 안보내버림. lat long double로 보내서 아직 확인 불가
+    case unknown = 3
     
     var rawVal: Int {
         return self.rawValue

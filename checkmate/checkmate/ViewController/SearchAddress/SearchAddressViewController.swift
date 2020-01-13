@@ -24,6 +24,7 @@ class SearchAddressViewController: UIViewController, NibLoadable {
         setNavigation()
         setTableView()
         setupToHideKeyboardOnTapOnView()
+        registerForKeyboardEvents()
         setTextField()
     }
     
@@ -60,6 +61,17 @@ extension SearchAddressViewController: UITextFieldDelegate {
         searchAddress(keyword: textField.text ?? "")
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension SearchAddressViewController: KeyboardObserving {
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height+self.view.safeAreaInsets.bottom, right: 0)
+        }
+    }
+    func keyboardWillHide(_ notification: Notification) {
+        tableView.contentInset = .zero
     }
 }
 

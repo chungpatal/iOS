@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, KeyboardObserving {
     @IBOutlet weak var searchTextField: UITextField!
     var categories: [Category] = [.all, .facility, .maintenance, .fire, .gas, .electronic, .elevator, .building]
     

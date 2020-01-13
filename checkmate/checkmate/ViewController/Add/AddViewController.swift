@@ -50,6 +50,7 @@ class AddViewController: UIViewController, NibLoadable {
         setNavigationBarImage()
         setNavigation()
         setupToHideKeyboardOnTapOnView()
+        registerForKeyboardEvents()
         setTextField()
     }
     
@@ -98,18 +99,6 @@ class AddViewController: UIViewController, NibLoadable {
     func setData() {
         //picker
         pickerData = PlaceUsage.allCases
-        //tableView
-        guard let selectedPlace = selectedPlace else {
-            return
-        }
-        tableViewData = selectedPlace.detailInfo.map({ (detailInfo) in
-            var cellData = ExpandCellData(opened: false,
-                                          category: detailInfo.categoryIdx,
-                                          safetyGrade: detailInfo.grade,
-                                          desc: detailInfo.detail)
-            cellData.opened = detailInfo.categoryIdx == selectedCategory
-            return cellData
-        })
     }
     
     func setupUI() {
@@ -135,7 +124,6 @@ class AddViewController: UIViewController, NibLoadable {
 }
 
 extension AddViewController : UITableViewDelegate, UITableViewDataSource {
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return tableViewData.count
     }
@@ -242,8 +230,21 @@ extension AddViewController: UITextFieldDelegate {
     }
 }
 
+extension AddViewController: KeyboardObserving {
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height+self.view.safeAreaInsets.bottom, right: 0)
+        }
+    }
+    func keyboardWillHide(_ notification: Notification) {
+        tableView.contentInset = .zero
+    }
+}
+
+
 // MARK: Network
 extension AddViewController: AlertUsable {
+    //todo 수정 네트워킹 확인하기
     func addPlace(selectedPlace: PlaceDetail?) {
         var detailInfo: [DetailInfo] = []
         for (sectionIndex, _) in tableViewData.enumerated() {

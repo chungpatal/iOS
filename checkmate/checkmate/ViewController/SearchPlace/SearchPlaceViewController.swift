@@ -33,6 +33,7 @@ class SearchPlaceViewController: UIViewController, NibLoadable {
         setNavigation()
         setTextField()
         setupToHideKeyboardOnTapOnView()
+        registerForKeyboardEvents()
         order = .high
         if let keyword = keyword {
             searchTextField.text = keyword
@@ -102,6 +103,18 @@ extension SearchPlaceViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         searchPlace(keyword: textField.text ?? "")
         return true
+    }
+}
+
+//todo 키보드 옵저빙 최적화
+extension SearchPlaceViewController: KeyboardObserving {
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height+self.view.safeAreaInsets.bottom, right: 0)
+        }
+    }
+    func keyboardWillHide(_ notification: Notification) {
+        tableView?.contentInset = .zero
     }
 }
 

@@ -19,11 +19,12 @@ class SpecificDetailViewController: UIViewController, NibLoadable {
    @IBOutlet weak var pkNumLabel: UILabel!
    @IBOutlet weak var detailLabel: UITextView!
     var tableViewData = [ExpandCellData]()
-    var selectedCategory: Category?
+    var selectedCategory: Category? //only in specific
     var selectedPlaceIdx: Int?
     var selectedPlace: PlaceDetail? {
         didSet {
             if let selectedPlace = selectedPlace {
+                self.setupTableViewData(selectedPlace: selectedPlace)
                 self.setupUI(selectedPlace: selectedPlace)
             }
         }
@@ -32,8 +33,9 @@ class SpecificDetailViewController: UIViewController, NibLoadable {
     @IBAction func editInfo(_ sender: Any) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let addVC = mainStoryboard.viewController(AddViewController.self)
-        addVC.selectedCategory = selectedCategory
+        addVC.selectedCategory = selectedCategory //only in specific
         addVC.selectedPlace = selectedPlace
+        addVC.tableViewData = tableViewData
         let navi = UINavigationController(rootViewController: addVC)
         navi.modalPresentationStyle = .fullScreen
         navi.navigationBar.tintColor = #colorLiteral(red: 0.3321701288, green: 0.3321786821, blue: 0.3321741223, alpha: 1)
@@ -60,27 +62,35 @@ class SpecificDetailViewController: UIViewController, NibLoadable {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigation()
-        setupData()
+        setupInitialTableViewData()
     }
     
-    func setupData() {
-        guard let selectedPlace = selectedPlace else {
-            return
+    func setupInitialTableViewData() {
+        var categories = Category.allCases.map { (category) in
+            return ExpandCellData(opened: false, category: category, safetyGrade: .unknown, desc: "데이터 없음")
         }
-        tableViewData = selectedPlace.detailInfo.map({ (detailInfo) in
-            return ExpandCellData(opened: false,
-                                  category: detailInfo.categoryIdx,
-                                  safetyGrade: detailInfo.grade,
-                                  desc: detailInfo.detail)
-        })
+        categories.removeFirst() //all 삭제
+        tableViewData = categories
     }
+    
+    func setupTableViewData(selectedPlace: PlaceDetail) {
+        selectedPlace.detailInfo.forEach { (detailInfo) in
+            let expectedRow = detailInfo.categoryIdx.rawValue-1
+            tableViewData[expectedRow].safetyGrade = detailInfo.grade
+            tableViewData[expectedRow].desc = detailInfo.detail
+            tableViewData[expectedRow].opened = detailInfo.categoryIdx == selectedCategory //only in specific
+        }
+    }
+
+    
     func setupUI(selectedPlace: PlaceDetail) {
-        nameLabel.text = selectedPlace.name
+        nameLabel.text = selectedPlace.name ?? "(이름 없음)"
         legalTownNameLabel.text = selectedPlace.legalName
         realNumLabel.text = selectedPlace.num
         useCategoryLabel.text = selectedPlace.useIdx.name
         pkNumLabel.text = selectedPlace.pk
         
+        //only in specific
         guard let selectedCategory = selectedCategory else {
             return
         }

@@ -24,10 +24,15 @@ class AllDetailViewController: UIViewController, NibLoadable {
         didSet {
             if let selectedPlace = selectedPlace {
                 self.setupUI(selectedPlace: selectedPlace)
+                self.setupTableViewData(selectedPlace: selectedPlace)
             }
         }
     }
-    var tableViewData = [ExpandCellData]()
+    var tableViewData = [ExpandCellData]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         if let selectedPlaceIdx = selectedPlaceIdx  {
@@ -38,12 +43,12 @@ class AllDetailViewController: UIViewController, NibLoadable {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTableView()
+        self.setupInitialTableViewData()
         self.setNavigation()
-        self.setupTableViewData()
     }
     
     func setupUI(selectedPlace: PlaceDetail) {
-        nameLabel.text = selectedPlace.name
+        nameLabel.text = selectedPlace.name ?? "(이름 없음)"
         safetyGradeView.image = selectedPlace.totalGrade.colorImage
         safetyGradeLabel.text = selectedPlace.totalGrade.name
         legalTownNameLabel.text = selectedPlace.legalName
@@ -52,23 +57,41 @@ class AllDetailViewController: UIViewController, NibLoadable {
         pkNumLabel.text = selectedPlace.pk
     }
     
-    func setupTableViewData() {
-        guard let selectedPlace = selectedPlace else {
-            return
+    func setupInitialTableViewData() {
+        var categories = Category.allCases.map { (category) in
+            return ExpandCellData(opened: false, category: category, safetyGrade: .unknown, desc: "데이터 없음")
         }
-        //todo 여기서 안나오는것들이 있을텐데 unkown으로 추가해줘야하는 상황이지~
-        tableViewData = selectedPlace.detailInfo.map({ (detailInfo) in
-            return ExpandCellData(opened: false,
-                                  category: detailInfo.categoryIdx,
-                                  safetyGrade: detailInfo.grade,
-                                  desc: detailInfo.detail)
-        })
+        categories.removeFirst() //all 삭제
+        tableViewData = categories
+    }
+    
+    func setupTableViewData(selectedPlace: PlaceDetail) {
+        //todo only in specific 체크해서 지울수 있으면 지우기
+        /*
+        case facility = 1 //시설물
+        case maintenance = 2 //유지관리
+        case fire = 3//소방
+        case gas = 4//가스
+        case electronic = 5//전기
+        case elevator = 6//승강기
+        case building = 7//건축물
+         */
+        selectedPlace.detailInfo.forEach { (detailInfo) in
+            let expectedRow = detailInfo.categoryIdx.rawValue-1
+            tableViewData[expectedRow].safetyGrade = detailInfo.grade
+            tableViewData[expectedRow].desc = detailInfo.detail
+        }
     }
     
     @IBAction func editInfo(_ sender: Any) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let addVC = mainStoryboard.viewController(AddViewController.self)
         addVC.selectedPlace = selectedPlace
+        addVC.tableViewData = tableViewData.map { (cellData) -> ExpandCellData in
+            var cellData_ = cellData
+            cellData_.opened = false
+            return cellData_
+        }
         let navi = UINavigationController(rootViewController: addVC)
         navi.modalPresentationStyle = .fullScreen
         navi.navigationBar.tintColor = #colorLiteral(red: 0.3321701288, green: 0.3321786821, blue: 0.3321741223, alpha: 1)
@@ -77,7 +100,7 @@ class AllDetailViewController: UIViewController, NibLoadable {
     @IBAction func map(_ sender: Any) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         guard let lat = selectedPlace?.lat, let long = selectedPlace?.long else {
-            self.showSimpleAlert(title: "해당 위치를 찾을 수 없습니다", message: "")
+            self.showSimpleAlert(title: "등록된 주소 정보가 없습니다", message: "")
             return
         }
         let mapVC = mainStoryboard.viewController(MapViewController.self)

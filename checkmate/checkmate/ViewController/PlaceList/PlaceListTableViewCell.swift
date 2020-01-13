@@ -15,7 +15,7 @@ class PlaceListTableViewCell: UITableViewCell, NibLoadable {
     @IBOutlet private weak var gradeLabel: UILabel!
     @IBOutlet private weak var gradeImageView: UIImageView!
     func configure(category: Category, data: Place) {
-        nameLabel.text = data.name
+        nameLabel.text = data.name ?? "(이름 없음)"
         pkLabel.text = data.pk
         infoLabel.text = data.info
         gradeLabel.text = data.grade.name
