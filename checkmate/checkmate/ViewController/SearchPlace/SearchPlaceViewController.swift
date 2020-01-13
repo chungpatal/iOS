@@ -108,7 +108,6 @@ extension SearchPlaceViewController: UITextFieldDelegate {
 // MARK: Network
 extension SearchPlaceViewController: AlertUsable {
     func searchPlace(keyword: String) {
-        print(keyword)
         NetworkManager.sharedInstance.searchPlace(keyword: keyword) { [weak self] (res) in
             guard let self = self else { return }
             switch res {

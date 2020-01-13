@@ -62,7 +62,7 @@ class PlaceListViewController: UIViewController, NibLoadable {
     }
     
     func selectInitialCategory() {
-        self.collectionView.selectItem(at: IndexPath(item: selectedCategory?.rawVal ?? 0, section: 0), animated: true, scrollPosition: .centeredHorizontally) //todo 이때도 didselectrow 눌리나 확인. 되면 viewdidload에서 되는거 지워도 됨
+        self.collectionView.selectItem(at: IndexPath(item: selectedCategory?.rawVal ?? 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     }
     func setCollectionView() {
         collectionView.delegate = self
