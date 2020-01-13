@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7Oo-n5-U88">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UUr-g3-hHe">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -1275,7 +1275,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="청파동 6가" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4D-tv-dW0">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="청파동 6가" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4D-tv-dW0">
                                                     <rect key="frame" x="16" y="10" width="68.666666666666671" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="GW7-0h-LQM"/>
@@ -1284,13 +1284,13 @@
                                                     <color key="textColor" red="0.3411764705882353" green="0.3411764705882353" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xD-jK-sYz">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xD-jK-sYz">
                                                     <rect key="frame" x="336" y="13" width="62" height="34"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="62" id="9gT-3R-0rh"/>
                                                         <constraint firstAttribute="height" constant="34" id="xM2-Uj-zn3"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button"/>
+                                                    <state key="normal" image="buttonSe"/>
                                                     <connections>
                                                         <action selector="selectAddress:" destination="wYZ-Al-b5e" eventType="touchUpInside" id="gnk-Xt-J5Z"/>
                                                     </connections>
@@ -1299,6 +1299,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="7xD-jK-sYz" secondAttribute="trailing" constant="16" id="0Za-A5-xVf"/>
                                                 <constraint firstItem="x4D-tv-dW0" firstAttribute="top" secondItem="2ir-aQ-ilO" secondAttribute="top" constant="10" id="22X-Ex-bKZ"/>
+                                                <constraint firstItem="7xD-jK-sYz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="x4D-tv-dW0" secondAttribute="trailing" constant="10" id="b3x-3C-dMM"/>
                                                 <constraint firstItem="7xD-jK-sYz" firstAttribute="centerY" secondItem="x4D-tv-dW0" secondAttribute="centerY" id="wQJ-89-3Oa"/>
                                                 <constraint firstAttribute="bottom" secondItem="x4D-tv-dW0" secondAttribute="bottom" constant="10" id="xel-49-BWJ"/>
                                                 <constraint firstItem="x4D-tv-dW0" firstAttribute="leading" secondItem="2ir-aQ-ilO" secondAttribute="leading" constant="16" id="xm1-21-JXm"/>
@@ -1345,7 +1346,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ig-dM-lhm">
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aY0-AX-nn7">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
@@ -1356,13 +1357,16 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="27o-98-ZU8" firstAttribute="bottom" secondItem="2ig-dM-lhm" secondAttribute="bottom" id="YUq-3H-ihP"/>
-                            <constraint firstItem="2ig-dM-lhm" firstAttribute="top" secondItem="27o-98-ZU8" secondAttribute="top" id="ki4-by-5yn"/>
-                            <constraint firstItem="2ig-dM-lhm" firstAttribute="leading" secondItem="27o-98-ZU8" secondAttribute="leading" id="lNP-tS-7OZ"/>
-                            <constraint firstItem="27o-98-ZU8" firstAttribute="trailing" secondItem="2ig-dM-lhm" secondAttribute="trailing" id="rkd-Fb-GAi"/>
+                            <constraint firstItem="27o-98-ZU8" firstAttribute="bottom" secondItem="aY0-AX-nn7" secondAttribute="bottom" id="D9l-RQ-Dvf"/>
+                            <constraint firstItem="aY0-AX-nn7" firstAttribute="leading" secondItem="27o-98-ZU8" secondAttribute="leading" id="Mgs-yg-HqO"/>
+                            <constraint firstItem="aY0-AX-nn7" firstAttribute="top" secondItem="27o-98-ZU8" secondAttribute="top" id="sKm-2Y-Z0O"/>
+                            <constraint firstItem="27o-98-ZU8" firstAttribute="trailing" secondItem="aY0-AX-nn7" secondAttribute="trailing" id="vVV-il-3qR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="27o-98-ZU8"/>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="aY0-AX-nn7" id="ceS-vJ-9ld"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ctd-G3-pfo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1697,6 +1701,7 @@
     </scenes>
     <resources>
         <image name="buttonFloating" width="93" height="93"/>
+        <image name="buttonSe" width="62" height="34"/>
         <image name="buttonaBack" width="9" height="15"/>
         <image name="iconAll" width="29" height="28"/>
         <image name="iconBlue" width="10" height="10"/>

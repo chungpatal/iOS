@@ -12,7 +12,11 @@ class SearchAddressViewController: UIViewController, NibLoadable {
 
     @IBOutlet var searchTextField: UITextField!
     @IBOutlet var tableView: UITableView!
-    var searchResultPlaces: [String] = []
+    var searchResultPlaces: [Juso] = [] {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     var delegate: AddressDelegate?
 
     override func viewDidLoad() {
@@ -21,7 +25,6 @@ class SearchAddressViewController: UIViewController, NibLoadable {
         setTableView()
         setupToHideKeyboardOnTapOnView()
         setTextField()
-        //searchTextField.addTarget(self, action: #selector(writeKeyword), for: .editingChanged) //todo 지우기
     }
     
     func setTableView() {
@@ -33,11 +36,6 @@ class SearchAddressViewController: UIViewController, NibLoadable {
         searchTextField.delegate = self
         searchTextField.returnKeyType = .done
     }
-
-    //todo 지우기
-//    @objc func writeKeyword() {
-//        //todo 주소 찾기 통신
-//    }
 }
 
 extension SearchAddressViewController: UITableViewDelegate, UITableViewDataSource {
@@ -59,9 +57,28 @@ extension SearchAddressViewController: UITableViewDelegate, UITableViewDataSourc
 
 extension SearchAddressViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //todo 주소 찾기 통신
+        searchAddress(keyword: textField.text ?? "")
         textField.resignFirstResponder()
         return true
+    }
+}
+
+// MARK: Network
+extension SearchAddressViewController: AlertUsable {
+    func searchAddress(keyword: String) {
+        NetworkManager.sharedInstance.searchAddress(keyword: keyword) { [weak self] (res) in
+            guard let self = self else { return }
+            switch res {
+            case .success(let data):
+                if data.isEmpty {
+                    self.showSimpleAlert(title: "일치하는 데이터가 없습니다", message: "")
+                } else {
+                    self.searchResultPlaces = data
+                }
+            case .failure(let type):
+                self.showErrorAlert(errorType: type)
+            }
+        }
     }
 }
 

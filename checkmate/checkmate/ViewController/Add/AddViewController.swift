@@ -83,8 +83,8 @@ class AddViewController: UIViewController, NibLoadable {
     }
     
     func setTextField() {
+        addressTextField.inputView = UIView()
         addressTextField.delegate = self
-        addressTextField.returnKeyType = .done
         nameTextField.delegate = self
         nameTextField.returnKeyType = .done
         legalTownNameTextField.delegate = self
@@ -231,6 +231,13 @@ extension AddViewController: AddressDelegate {
 extension AddViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
+    }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == addressTextField {
+            search("")
+            return false
+        }
         return true
     }
 }

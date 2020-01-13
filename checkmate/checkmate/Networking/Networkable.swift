@@ -16,6 +16,7 @@ protocol Networkable {
     func addPlace(place: PlaceDetail, completion: @escaping (Result<String, NetworkError>) -> Void)
     func editPlace(place: PlaceDetail, completion: @escaping (Result<String, NetworkError>) -> Void)
     func searchPlace(keyword: String, completion: @escaping (Result<[Place], NetworkError>) -> Void)
+    func searchAddress(keyword: String, completion: @escaping (Result<[Juso], NetworkError>) -> Void)
 }
 
 extension Networkable {

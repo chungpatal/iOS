@@ -12,8 +12,8 @@ class SearchAddressTableViewCell: UITableViewCell, NibLoadable {
     @IBOutlet weak var addressLabel: UILabel!
     var selectButtonAction : ((String) -> ())?
     
-    func configure(row: Int, data: String) {
-        addressLabel.text = data
+    func configure(row: Int, data: Juso) {
+        addressLabel.text = data.roadAddr
     }
     @IBAction func selectAddress(_ sender: Any) {
        selectButtonAction?(addressLabel.text ?? "")

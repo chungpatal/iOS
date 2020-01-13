@@ -14,6 +14,8 @@
 		3B13CA2623BD4236008C7994 /* AddExpandedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B13CA2523BD4236008C7994 /* AddExpandedCell.xib */; };
 		3B13CA2A23BD428B008C7994 /* AddExpandedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B13CA2923BD428B008C7994 /* AddExpandedCell.swift */; };
 		3B13CA2C23BD4501008C7994 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B13CA2B23BD4501008C7994 /* RoundButton.swift */; };
+		3B29C66B23CC9D40009EAAD0 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B29C66A23CC9D40009EAAD0 /* Address.swift */; };
+		3B29C66E23CCAB44009EAAD0 /* jusoConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B29C66D23CCAB44009EAAD0 /* jusoConfig.swift */; };
 		3B48B19923BCE61A00E1EE85 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B19823BCE61A00E1EE85 /* MainViewController.swift */; };
 		3B48B19B23BCF06300E1EE85 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B19A23BCF06300E1EE85 /* UICollectionView+Extension.swift */; };
 		3B48B19D23BCF0C600E1EE85 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B19C23BCF0C600E1EE85 /* MainCollectionViewCell.swift */; };
@@ -37,7 +39,6 @@
 		3BB0FD7A23CB1F460032DEE9 /* UIPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB0FD7923CB1F460032DEE9 /* UIPresentable.swift */; };
 		3BB0FD7C23CB1F4C0032DEE9 /* AlertUsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB0FD7B23CB1F4C0032DEE9 /* AlertUsable.swift */; };
 		3BB0FD7E23CB35D70032DEE9 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB0FD7D23CB35D70032DEE9 /* UINavigationController+Extension.swift */; };
-		3BB0FD8323CB54160032DEE9 /* AddressWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB0FD8223CB54160032DEE9 /* AddressWebViewController.swift */; };
 		3BCB7A4623BCDA2D0082B5AA /* PlaceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCB7A4523BCDA2D0082B5AA /* PlaceDetail.swift */; };
 		3BCB7A4823BCDD7D0082B5AA /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCB7A4723BCDD7D0082B5AA /* Place.swift */; };
 		3BCB7A4D23BCE0C00082B5AA /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCB7A4C23BCE0C00082B5AA /* String+Extension.swift */; };
@@ -343,6 +344,8 @@
 		3B13CA2523BD4236008C7994 /* AddExpandedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddExpandedCell.xib; sourceTree = "<group>"; };
 		3B13CA2923BD428B008C7994 /* AddExpandedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpandedCell.swift; sourceTree = "<group>"; };
 		3B13CA2B23BD4501008C7994 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		3B29C66A23CC9D40009EAAD0 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		3B29C66D23CCAB44009EAAD0 /* jusoConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jusoConfig.swift; sourceTree = "<group>"; };
 		3B48B19823BCE61A00E1EE85 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3B48B19A23BCF06300E1EE85 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		3B48B19C23BCF0C600E1EE85 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -366,7 +369,6 @@
 		3BB0FD7923CB1F460032DEE9 /* UIPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPresentable.swift; sourceTree = "<group>"; };
 		3BB0FD7B23CB1F4C0032DEE9 /* AlertUsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUsable.swift; sourceTree = "<group>"; };
 		3BB0FD7D23CB35D70032DEE9 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
-		3BB0FD8223CB54160032DEE9 /* AddressWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressWebViewController.swift; sourceTree = "<group>"; };
 		3BCB7A4523BCDA2D0082B5AA /* PlaceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetail.swift; sourceTree = "<group>"; };
 		3BCB7A4723BCDD7D0082B5AA /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		3BCB7A4C23BCE0C00082B5AA /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -708,6 +710,14 @@
 			path = Add;
 			sourceTree = "<group>";
 		};
+		3B29C66C23CCAAF3009EAAD0 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				3B29C66D23CCAB44009EAAD0 /* jusoConfig.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		3B48B1A023BCF72100E1EE85 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -801,6 +811,7 @@
 				3BCB7A4723BCDD7D0082B5AA /* Place.swift */,
 				3BCB7A4523BCDA2D0082B5AA /* PlaceDetail.swift */,
 				3BB0FD7723CB1B5C0032DEE9 /* Default.swift */,
+				3B29C66A23CC9D40009EAAD0 /* Address.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -855,6 +866,7 @@
 			isa = PBXGroup;
 			children = (
 				3BE29F6C23BE55A00025C2A6 /* IOS_DaumMap_SDK_1.4.0 */,
+				3B29C66C23CCAAF3009EAAD0 /* Config */,
 				3BB0FD6D23CB070E0032DEE9 /* Networking */,
 				3BB0FD6C23CB070B0032DEE9 /* Common */,
 				3B48B1B423BCFFE700E1EE85 /* Layout */,
@@ -1227,7 +1239,6 @@
 		3BE2A1B023BE87F00025C2A6 /* SearchAddress */ = {
 			isa = PBXGroup;
 			children = (
-				3BB0FD8223CB54160032DEE9 /* AddressWebViewController.swift */,
 				3BE2A1B123BE87FC0025C2A6 /* SearchAddressViewController.swift */,
 				3B50A99123BE8D2C00BCBBF6 /* SearchAddressTableViewCell.swift */,
 			);
@@ -1650,6 +1661,7 @@
 			files = (
 				3B13CA2C23BD4501008C7994 /* RoundButton.swift in Sources */,
 				3BB0FD7823CB1B5C0032DEE9 /* Default.swift in Sources */,
+				3B29C66E23CCAB44009EAAD0 /* jusoConfig.swift in Sources */,
 				3BADDCB923BE0FC50083F75A /* AddExpandedCellDelegate.swift in Sources */,
 				3BB0FD7423CB14FD0032DEE9 /* Networkable.swift in Sources */,
 				3B48B1B623BCFFF300E1EE85 /* CategoryLayout.swift in Sources */,
@@ -1662,12 +1674,12 @@
 				3B13CA2423BD3ECE008C7994 /* BorderView.swift in Sources */,
 				3B48B1AD23BCFD2B00E1EE85 /* PlaceListViewController.swift in Sources */,
 				3B50A99223BE8D2C00BCBBF6 /* SearchAddressTableViewCell.swift in Sources */,
+				3B29C66B23CC9D40009EAAD0 /* Address.swift in Sources */,
 				3BCB7A4D23BCE0C00082B5AA /* String+Extension.swift in Sources */,
 				3B13CA1D23BD311C008C7994 /* UIViewController+Extension.swift in Sources */,
 				3BB0FD7C23CB1F4C0032DEE9 /* AlertUsable.swift in Sources */,
 				3B48B1A823BCF7A800E1EE85 /* SpecificDetailViewController.swift in Sources */,
 				3BE014C223BC915D00EB89D3 /* AppDelegate.swift in Sources */,
-				3BB0FD8323CB54160032DEE9 /* AddressWebViewController.swift in Sources */,
 				3BB0FD7623CB15100032DEE9 /* NetworkManager.swift in Sources */,
 				3B48B1AA23BCF7F000E1EE85 /* Storyboard+Extension.swift in Sources */,
 				3BE014C423BC915D00EB89D3 /* SceneDelegate.swift in Sources */,

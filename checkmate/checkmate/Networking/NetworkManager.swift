@@ -10,6 +10,7 @@ import Foundation
 import Moya
 
 struct NetworkManager: Networkable {
+    
     static let sharedInstance = NetworkManager()
     let provider = MoyaProvider<CheckmateAPI>()
     
@@ -71,6 +72,21 @@ extension NetworkManager {
             switch result {
             case .success(let successResult):
                 completion(.success(successResult.resResult.data))
+            case .failure(let errorType):
+                completion(self.failureHandle(errorType: errorType))
+            }
+        }
+    }
+    func searchAddress(keyword: String, completion: @escaping (Result<[Juso], NetworkError>) -> Void) {
+        fetchData(api: .searchAddress(keyword: keyword), networkData: Address.self) { (result) in
+            switch result {
+            case .success(let successResult):
+                if let juso = successResult.resResult.results.juso {
+                    completion(.success(juso))
+                } else {
+                    let errorMessage = successResult.resResult.results.common.errorMessage
+                    completion(.failure(.networkError((-1, errorMessage))))
+                }
             case .failure(let errorType):
                 completion(self.failureHandle(errorType: errorType))
             }
