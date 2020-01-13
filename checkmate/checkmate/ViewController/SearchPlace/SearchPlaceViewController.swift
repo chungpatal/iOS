@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchPlaceViewController: UIViewController, NibLoadable {
-    //todo 키보드 처리
+
     @IBOutlet private weak var tableView: UITableView?
     @IBOutlet weak var highOrderButton: UIButton!
     @IBOutlet weak var lowOrderButton: UIButton!
@@ -32,6 +32,7 @@ class SearchPlaceViewController: UIViewController, NibLoadable {
         setTableView()
         setNavigation()
         setTextField()
+        setupToHideKeyboardOnTapOnView()
         order = .high
         if let keyword = keyword {
             searchTextField.text = keyword

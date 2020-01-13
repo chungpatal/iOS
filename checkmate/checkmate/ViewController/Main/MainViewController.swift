@@ -9,7 +9,6 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    //todo 키보드 처리
     @IBOutlet weak var searchTextField: UITextField!
     var categories: [Category] = [.all, .facility, .maintenance, .fire, .gas, .electronic, .elevator, .building]
     
@@ -33,23 +32,31 @@ class MainViewController: UIViewController {
         navi.navigationBar.tintColor = #colorLiteral(red: 0.3321701288, green: 0.3321786821, blue: 0.3321741223, alpha: 1)
         self.present(navi, animated: true)
     }
-  
+    
     @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigation()
         setCollectionView()
+        setupToHideKeyboardOnTapOnView()
+        setTextField()
     }
-
+    
     func setCollectionView() {
-           collectionView.delegate = self
-           collectionView.dataSource = self
-       }
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+    
+    func setTextField() {
+        searchTextField.delegate = self
+        searchTextField.returnKeyType = .done
+    }
 }
 
 
+
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-   
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }
@@ -87,5 +94,13 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     //collectionView inset
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 36, left: 6, bottom: 36, right: 6)
+    }
+}
+
+extension MainViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        search("")
+        return true
     }
 }

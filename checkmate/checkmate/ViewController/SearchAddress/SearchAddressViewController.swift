@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchAddressViewController: UIViewController, NibLoadable {
-    //todo 키보드 처리
+
     @IBOutlet var searchTextField: UITextField!
     @IBOutlet var tableView: UITableView!
     var searchResultPlaces: [String] = []
@@ -19,17 +19,25 @@ class SearchAddressViewController: UIViewController, NibLoadable {
         super.viewDidLoad()
         setNavigation()
         setTableView()
-        searchTextField.addTarget(self, action: #selector(writeKeyword), for: .editingChanged)
+        setupToHideKeyboardOnTapOnView()
+        setTextField()
+        //searchTextField.addTarget(self, action: #selector(writeKeyword), for: .editingChanged) //todo 지우기
     }
     
     func setTableView() {
         tableView?.delegate = self
         tableView?.dataSource = self
     }
-
-    @objc func writeKeyword() {
-        //todo 주소 찾기 통신
+    
+    func setTextField() {
+        searchTextField.delegate = self
+        searchTextField.returnKeyType = .done
     }
+
+    //todo 지우기
+//    @objc func writeKeyword() {
+//        //todo 주소 찾기 통신
+//    }
 }
 
 extension SearchAddressViewController: UITableViewDelegate, UITableViewDataSource {
@@ -49,6 +57,15 @@ extension SearchAddressViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
+extension SearchAddressViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //todo 주소 찾기 통신
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
 protocol AddressDelegate {
     func selectPlace(name: String)
 }
+

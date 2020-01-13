@@ -16,7 +16,7 @@ struct ExpandCellData {
 }
 
 class AddViewController: UIViewController, NibLoadable {
-    //todo 키보드 처리
+
     var tableViewData = [ExpandCellData]()
     var selectedPlace: PlaceDetail?
     var selectedCategory: Category?
@@ -49,6 +49,8 @@ class AddViewController: UIViewController, NibLoadable {
         setupTableView()
         setNavigationBarImage()
         setNavigation()
+        setupToHideKeyboardOnTapOnView()
+        setTextField()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -78,6 +80,19 @@ class AddViewController: UIViewController, NibLoadable {
         tableView.delegate = self
         tableView.dataSource = self
         registerTableViewCells()
+    }
+    
+    func setTextField() {
+        addressTextField.delegate = self
+        addressTextField.returnKeyType = .done
+        nameTextField.delegate = self
+        nameTextField.returnKeyType = .done
+        legalTownNameTextField.delegate = self
+        legalTownNameTextField.returnKeyType = .done
+        realNumTextField.delegate = self
+        realNumTextField.returnKeyType = .done
+        pkNumTextField.delegate = self
+        pkNumTextField.returnKeyType = .done
     }
     
     func setData() {
@@ -213,6 +228,13 @@ extension AddViewController: AddressDelegate {
     }
 }
 
+extension AddViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
 // MARK: Network
 extension AddViewController: AlertUsable {
     func addPlace(selectedPlace: PlaceDetail?) {
@@ -264,3 +286,5 @@ extension AddViewController: AlertUsable {
         }
     }
 }
+
+
