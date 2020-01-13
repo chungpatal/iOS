@@ -10,7 +10,7 @@ import UIKit
 
 class MapViewController: UIViewController, MTMapViewDelegate, NibLoadable {
     private var mapView: MTMapView?
-    private var poiItem: MTMapPOIItem?
+    private var poiItem: MTMapPOIItem = MTMapPOIItem()
     var geo: (lat: Double, long: Double)?
     
     override func viewDidLoad() {
@@ -41,16 +41,18 @@ class MapViewController: UIViewController, MTMapViewDelegate, NibLoadable {
 //    }
 
     func showCustosmMarker(geo: (lat: Double, long: Double)) {
-        poiItem = MTMapPOIItem()
-        poiItem?.itemName = "태영 빌딩"
-        poiItem?.markerType = .customImage
-        poiItem?.customImageName = "iconMap"
-        let point = MTMapPointGeo(latitude: geo.lat, longitude: geo.long)
-        poiItem?.mapPoint = MTMapPoint(geoCoord: point)
-        poiItem?.showAnimationType = .springFromGround
-        poiItem?.customImageAnchorPointOffset = MTMapImageOffset(offsetX: 30, offsetY: 0)
+        poiItem.markerType = .customImage
+        poiItem.customImageName = "iconMap"
+        poiItem.showAnimationType = .springFromGround
+        poiItem.customImageAnchorPointOffset = MTMapImageOffset(offsetX: 30, offsetY: 0)
         mapView?.addPOIItems([poiItem])
-        mapView?.setMapCenter(MTMapPoint(geoCoord: point), animated: true)
-        mapView?.fitArea(toShowMapPoints: [poiItem?.mapPoint])
+        
+        let point = MTMapPointGeo(latitude: geo.lat, longitude: geo.long)
+        guard let mapPoint = MTMapPoint(geoCoord: point) else {
+            return
+        }
+        poiItem.mapPoint = mapPoint
+        mapView?.setMapCenter(mapPoint, animated: true)
+        mapView?.fitArea(toShowMapPoints: [mapPoint])
     }
 }

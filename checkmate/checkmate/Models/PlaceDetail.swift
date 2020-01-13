@@ -86,8 +86,6 @@ enum PlaceUsage:Int, Codable, CaseIterable {
             return "종교시설"
         case .warehouse:
             return "창고시설"
-        @unknown default:
-            return ""
         }
     }
     
