@@ -19,7 +19,6 @@ class AddViewController: UIViewController, NibLoadable {
 
     var tableViewData = [ExpandCellData]()
     var selectedPlace: PlaceDetail?
-    var selectedCategory: Category?
     
     @IBOutlet var addressTextField: UITextField!
     @IBOutlet var nameTextField: UITextField!

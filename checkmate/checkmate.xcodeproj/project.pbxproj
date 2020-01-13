@@ -21,7 +21,6 @@
 		3B48B19B23BCF06300E1EE85 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B19A23BCF06300E1EE85 /* UICollectionView+Extension.swift */; };
 		3B48B19D23BCF0C600E1EE85 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B19C23BCF0C600E1EE85 /* MainCollectionViewCell.swift */; };
 		3B48B19F23BCF45100E1EE85 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B19E23BCF45100E1EE85 /* UIView+Extension.swift */; };
-		3B48B1A823BCF7A800E1EE85 /* SpecificDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B1A723BCF7A800E1EE85 /* SpecificDetailViewController.swift */; };
 		3B48B1AA23BCF7F000E1EE85 /* Storyboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B1A923BCF7F000E1EE85 /* Storyboard+Extension.swift */; };
 		3B48B1AD23BCFD2B00E1EE85 /* PlaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B1AC23BCFD2B00E1EE85 /* PlaceListViewController.swift */; };
 		3B48B1B123BCFF2300E1EE85 /* PlaceListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B48B1B023BCFF2300E1EE85 /* PlaceListTableViewCell.swift */; };
@@ -352,7 +351,6 @@
 		3B48B19A23BCF06300E1EE85 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		3B48B19C23BCF0C600E1EE85 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		3B48B19E23BCF45100E1EE85 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		3B48B1A723BCF7A800E1EE85 /* SpecificDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificDetailViewController.swift; sourceTree = "<group>"; };
 		3B48B1A923BCF7F000E1EE85 /* Storyboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboard+Extension.swift"; sourceTree = "<group>"; };
 		3B48B1AC23BCFD2B00E1EE85 /* PlaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListViewController.swift; sourceTree = "<group>"; };
 		3B48B1B023BCFF2300E1EE85 /* PlaceListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListTableViewCell.swift; sourceTree = "<group>"; };
@@ -732,30 +730,13 @@
 		3B48B1A223BCF75100E1EE85 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				3B48B1A323BCF75B00E1EE85 /* All */,
-				3B48B1A423BCF76000E1EE85 /* Specific */,
-			);
-			path = Detail;
-			sourceTree = "<group>";
-		};
-		3B48B1A323BCF75B00E1EE85 /* All */ = {
-			isa = PBXGroup;
-			children = (
 				3B13CA1E23BD31E3008C7994 /* AllDetailViewController.swift */,
 				3BADDCB223BE0EE50083F75A /* ExpandableCell.swift */,
 				3BADDCB423BE0EFA0083F75A /* ExpandedCell.swift */,
 				3BE014DD23BC9D1300EB89D3 /* ExpandableCell2.xib */,
 				3BE014DF23BC9D7000EB89D3 /* ExpandedCell.xib */,
 			);
-			path = All;
-			sourceTree = "<group>";
-		};
-		3B48B1A423BCF76000E1EE85 /* Specific */ = {
-			isa = PBXGroup;
-			children = (
-				3B48B1A723BCF7A800E1EE85 /* SpecificDetailViewController.swift */,
-			);
-			path = Specific;
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		3B48B1AB23BCFD1800E1EE85 /* PlaceList */ = {
@@ -1681,7 +1662,6 @@
 				3BCB7A4D23BCE0C00082B5AA /* String+Extension.swift in Sources */,
 				3B13CA1D23BD311C008C7994 /* UIViewController+Extension.swift in Sources */,
 				3BB0FD7C23CB1F4C0032DEE9 /* AlertUsable.swift in Sources */,
-				3B48B1A823BCF7A800E1EE85 /* SpecificDetailViewController.swift in Sources */,
 				3BE014C223BC915D00EB89D3 /* AppDelegate.swift in Sources */,
 				3BB0FD7623CB15100032DEE9 /* NetworkManager.swift in Sources */,
 				3B48B1AA23BCF7F000E1EE85 /* Storyboard+Extension.swift in Sources */,

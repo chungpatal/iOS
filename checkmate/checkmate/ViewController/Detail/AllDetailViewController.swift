@@ -18,7 +18,8 @@ class AllDetailViewController: UIViewController, NibLoadable {
     @IBOutlet weak var useCategoryLabel: UILabel!
     @IBOutlet weak var pkNumLabel: UILabel!
     @IBOutlet var tableView: UITableView!
-
+    
+    var selectedCategory: Category?
     var selectedPlaceIdx: Int?
     var selectedPlace: PlaceDetail? {
         didSet {
@@ -49,12 +50,25 @@ class AllDetailViewController: UIViewController, NibLoadable {
     
     func setupUI(selectedPlace: PlaceDetail) {
         nameLabel.text = selectedPlace.name ?? "(이름 없음)"
-        safetyGradeView.image = selectedPlace.totalGrade.colorImage
-        safetyGradeLabel.text = selectedPlace.totalGrade.name
         legalTownNameLabel.text = selectedPlace.legalName
         realNumLabel.text = selectedPlace.num
         useCategoryLabel.text = selectedPlace.useIdx.name
         pkNumLabel.text = selectedPlace.pk
+        
+        guard let selectedCategory = selectedCategory else {
+            return
+        }
+        
+        if selectedCategory == .all {
+            safetyGradeView.image = selectedPlace.totalGrade.colorImage
+                   safetyGradeLabel.text = selectedPlace.totalGrade.name
+        } else {
+            let selectedCategoryInfo = selectedPlace.detailInfo.filter { (detailInfo) in
+                return detailInfo.categoryIdx == selectedCategory
+            }.first
+            safetyGradeView.image = selectedCategoryInfo?.grade.colorImage
+            safetyGradeLabel.text = selectedCategoryInfo?.grade.name
+        }
     }
     
     func setupInitialTableViewData() {
@@ -66,7 +80,6 @@ class AllDetailViewController: UIViewController, NibLoadable {
     }
     
     func setupTableViewData(selectedPlace: PlaceDetail) {
-        //todo only in specific 체크해서 지울수 있으면 지우기
         /*
         case facility = 1 //시설물
         case maintenance = 2 //유지관리
@@ -89,7 +102,7 @@ class AllDetailViewController: UIViewController, NibLoadable {
         addVC.selectedPlace = selectedPlace
         addVC.tableViewData = tableViewData.map { (cellData) -> ExpandCellData in
             var cellData_ = cellData
-            cellData_.opened = false
+            cellData_.opened = cellData_.category == selectedCategory
             return cellData_
         }
         let navi = UINavigationController(rootViewController: addVC)
@@ -123,50 +136,69 @@ class AllDetailViewController: UIViewController, NibLoadable {
 extension AllDetailViewController : UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tableViewData.count
+        if selectedCategory ==  .all {
+           return tableViewData.count
+        }
+        //specific category
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableViewData[section].opened {
-            //위에 섹션까지 포함되니까
-            return 2
-        } else {
-            return 1
+        if selectedCategory ==  .all {
+           if tableViewData[section].opened {
+               //위에 섹션까지 포함되니까
+               return 2
+           } else {
+               return 1
+           }
         }
+        //specific category
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.cell(for: ExpandableCell2.self)
-            cell.configure(data: tableViewData[indexPath.section])
-            cell.moreLabel.text = "더보기"
-            return cell
-        } else {
-            let cell = tableView.cell(for: ExpandedCell.self)
-            cell.configure(data: tableViewData[indexPath.section])
-            return cell
+        if selectedCategory ==  .all {
+            if indexPath.row == 0 {
+                let cell = tableView.cell(for: ExpandableCell2.self)
+                cell.configure(data: tableViewData[indexPath.section])
+                cell.moreLabel.text = "더보기"
+                return cell
+            } else {
+                let cell = tableView.cell(for: ExpandedCell.self)
+                cell.configure(data: tableViewData[indexPath.section].desc)
+                return cell
+            }
         }
+        //specific category
+        let cell = tableView.cell(for: ExpandedCell.self)
+        let selectedCategoryInfo = selectedPlace?.detailInfo.filter { (detailInfo) in
+            return detailInfo.categoryIdx == selectedCategory
+        }.first
+        cell.configure(data: selectedCategoryInfo?.detail)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //아래 셀 클릭할때 닫히지 않도록
-        if indexPath.row == 0 {
-            tableViewData[indexPath.section].opened = !tableViewData[indexPath.section].opened
-            let sections = IndexSet.init(integer: indexPath.section)
-            tableView.reloadSections(sections, with: .none) //play animation
-            
-            let cell = tableView.cellForRow(at: indexPath) as? ExpandableCell2
-            if tableViewData[indexPath.section].opened {
-                //닫기
-                cell?.moreLabel.text = "접기"
-                UIView.animate(withDuration: 0.3) {
-                    cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
-                }
-            } else {
-                //열기
-                cell?.moreLabel.text = "더보기"
-                UIView.animate(withDuration: 0.3) {
-                    cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)
+        if selectedCategory ==  .all {
+            //아래 셀 클릭할때 닫히지 않도록
+            if indexPath.row == 0 {
+                tableViewData[indexPath.section].opened = !tableViewData[indexPath.section].opened
+                let sections = IndexSet.init(integer: indexPath.section)
+                tableView.reloadSections(sections, with: .none) //play animation
+                
+                let cell = tableView.cellForRow(at: indexPath) as? ExpandableCell2
+                if tableViewData[indexPath.section].opened {
+                    //닫기
+                    cell?.moreLabel.text = "접기"
+                    UIView.animate(withDuration: 0.3) {
+                        cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
+                    }
+                } else {
+                    //열기
+                    cell?.moreLabel.text = "더보기"
+                    UIView.animate(withDuration: 0.3) {
+                        cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)
+                    }
                 }
             }
         }

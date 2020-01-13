@@ -92,6 +92,7 @@ extension SearchPlaceViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let allDetailVC = mainStoryboard.viewController(AllDetailViewController.self)
+        allDetailVC.selectedCategory = .all
         allDetailVC.selectedPlaceIdx = places[indexPath.row].placeIdx
         self.show(allDetailVC, sender: nil)
         tableView.deselectRow(at: indexPath, animated: true)

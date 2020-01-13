@@ -11,8 +11,8 @@ import UIKit
 class ExpandedCell: UITableViewCell, NibLoadable {
     @IBOutlet weak var titleLabelHeight: NSLayoutConstraint!
     @IBOutlet var titleLabel: UILabel!
-    func configure(data: ExpandCellData) {
-        titleLabel.text = data.desc
+    func configure(data: String?) {
+        titleLabel.text = data
         let estimatedHeight = titleLabel.text?.height(withConstrainedWidth: self.contentView.frame.width, font:titleLabel.font) ?? 0
         titleLabelHeight.constant = estimatedHeight
     }

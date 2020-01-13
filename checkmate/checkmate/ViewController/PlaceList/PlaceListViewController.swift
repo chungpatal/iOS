@@ -132,16 +132,10 @@ extension PlaceListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let selectedCategory = selectedCategory else {
             return
         }
-        if selectedCategory == .all {
-            let allDetailVC = mainStoryboard.viewController(AllDetailViewController.self)
-            allDetailVC.selectedPlaceIdx = places[indexPath.row].placeIdx
-            self.show(allDetailVC, sender: nil)
-        } else {
-            let specificDetailVC = mainStoryboard.viewController(SpecificDetailViewController.self)
-            specificDetailVC.selectedCategory = selectedCategory
-            specificDetailVC.selectedPlaceIdx = places[indexPath.row].placeIdx
-            self.show(specificDetailVC, sender: nil)
-        }
+        let allDetailVC = mainStoryboard.viewController(AllDetailViewController.self)
+        allDetailVC.selectedCategory = selectedCategory
+        allDetailVC.selectedPlaceIdx = places[indexPath.row].placeIdx
+        self.show(allDetailVC, sender: nil)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
