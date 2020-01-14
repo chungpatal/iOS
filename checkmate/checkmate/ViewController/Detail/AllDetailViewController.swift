@@ -161,7 +161,6 @@ extension AllDetailViewController : UITableViewDelegate, UITableViewDataSource {
             if indexPath.row == 0 {
                 let cell = tableView.cell(for: ExpandableCell2.self)
                 cell.configure(data: tableViewData[indexPath.section])
-                cell.moreLabel.text = "더보기"
                 return cell
             } else {
                 let cell = tableView.cell(for: ExpandedCell.self)
@@ -183,8 +182,8 @@ extension AllDetailViewController : UITableViewDelegate, UITableViewDataSource {
             //아래 셀 클릭할때 닫히지 않도록
             if indexPath.row == 0 {
                 tableViewData[indexPath.section].opened = !tableViewData[indexPath.section].opened
-                let sections = IndexSet.init(integer: indexPath.section)
-                tableView.reloadSections(sections, with: .none) //play animation
+                //let sections = IndexSet.init(integer: indexPath.section)
+                //tableView.reloadSections(sections, with: .none) //play animation
                 
                 let cell = tableView.cellForRow(at: indexPath) as? ExpandableCell2
                 if tableViewData[indexPath.section].opened {
