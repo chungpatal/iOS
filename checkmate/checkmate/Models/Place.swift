@@ -14,7 +14,7 @@ struct PlaceModel: Codable {
 }
 
 struct Place: Codable {
-    let placeIdx: Int
+    let placeIdx: Int?
     var name: String?
     let pk, info: String
     let grade: SafetyGrade

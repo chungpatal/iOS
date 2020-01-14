@@ -256,7 +256,7 @@ extension AddViewController: AlertUsable {
                                                 detail: sectionData.desc)
             detailInfo.append(categoryDetailInfo)
         }
-        var newPlace = PlaceDetail(placeIdx: -1,
+        var newPlace = PlaceDetail(placeIdx: nil,
                                    name: nameTextField.text,
                                    address: addressTextField.text,
                                    totalGrade: SafetyGrade.safe,

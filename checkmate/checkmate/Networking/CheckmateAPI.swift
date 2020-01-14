@@ -79,30 +79,23 @@ extension CheckmateAPI: TargetType {
         case .searchPlace(let keyword):
             let parameters: [String: Any] = ["q": keyword]
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-        case .addPlace(let place):
+        case .addPlace(let place), .editPlace(let place):
             let detailInfo = place.detailInfo.map { detailInfo -> [String : Any] in
                 let editedInfo: [String: Any] = ["category_idx": detailInfo.categoryIdx.rawVal,
                                                  "grade": detailInfo.grade.rawVal,
                                                  "detail":detailInfo.detail]
                 return editedInfo
             }
-            let parameters: [String: Any] = ["name": place.name ?? "",
+            var parameters: [String: Any] = ["name": place.name ?? "",
                                              "address": place.address ?? "",
                                              "legal_name": place.legalName,
                                              "num": place.num,
                                              "pk": place.pk,
                                              "use_idx": place.useIdx.rawVal,
                                              "detail_info": detailInfo]
-             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
-        case .editPlace(let place):
-            let parameters: [String: Any] = ["place_idx": place.placeIdx,
-                                             "name": place.name ?? "",
-                                             "address": place.address ?? "",
-                                             "legal_name": place.legalName,
-                                             "num": place.num,
-                                             "pk": place.pk,
-                                             "use_idx": place.useIdx.rawVal,
-                                             "detail_info": place.detailInfo]
+            if let placeIdx = place.placeIdx {
+                parameters["place_idx"] = placeIdx
+            }
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         case .searchAddress(let keyword):
             let parameters: [String: Any] = ["confmKey": jusoConfmKey,
