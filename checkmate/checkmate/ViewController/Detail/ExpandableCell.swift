@@ -17,23 +17,16 @@ class ExpandableCell2: UITableViewCell, NibLoadable {
     func configure(data: ExpandCellData) {
         if data.opened {
             customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
+            moreLabel.text = "접기"
         } else {
             customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)
+            moreLabel.text = "더보기"
         }
         titleLabel.text = data.category.name
         changeCircleColor(selectedGrade: data.safetyGrade)
     }
     
    func changeCircleColor(selectedGrade: SafetyGrade) {
-        switch selectedGrade {
-        case .unknown:
-            saftyGradeImageView.image = #imageLiteral(resourceName: "iconGray")
-        case .safe:
-            saftyGradeImageView.image = #imageLiteral(resourceName: "iconBlue")
-        case .warn:
-            saftyGradeImageView.image = #imageLiteral(resourceName: "iconYellow")
-        case .danger:
-            saftyGradeImageView.image = #imageLiteral(resourceName: "iconRed")
-        }
+        saftyGradeImageView.image = selectedGrade.colorImage
     }
 }

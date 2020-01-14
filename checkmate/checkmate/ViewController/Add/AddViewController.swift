@@ -243,7 +243,7 @@ extension AddViewController: KeyboardObserving {
 
 // MARK: Network
 extension AddViewController: AlertUsable {
-    //todo 수정 네트워킹 확인하기
+
     func addPlace(selectedPlace: PlaceDetail?) {
         var detailInfo: [DetailInfo] = []
         for (sectionIndex, _) in tableViewData.enumerated() {

@@ -182,23 +182,6 @@ extension AllDetailViewController : UITableViewDelegate, UITableViewDataSource {
             //아래 셀 클릭할때 닫히지 않도록
             if indexPath.row == 0 {
                 tableViewData[indexPath.section].opened = !tableViewData[indexPath.section].opened
-                //let sections = IndexSet.init(integer: indexPath.section)
-                //tableView.reloadSections(sections, with: .none) //play animation
-                
-                let cell = tableView.cellForRow(at: indexPath) as? ExpandableCell2
-                if tableViewData[indexPath.section].opened {
-                    //닫기
-                    cell?.moreLabel.text = "접기"
-                    UIView.animate(withDuration: 0.3) {
-                        cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
-                    }
-                } else {
-                    //열기
-                    cell?.moreLabel.text = "더보기"
-                    UIView.animate(withDuration: 0.3) {
-                        cell?.customArrowImage.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)
-                    }
-                }
             }
         }
     }
