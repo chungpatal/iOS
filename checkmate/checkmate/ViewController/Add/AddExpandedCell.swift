@@ -9,6 +9,7 @@
 import UIKit
 
 class AddExpandedCell: UITableViewCell, NibLoadable {
+    
     var selectedGrade : SafetyGrade = .unknown
     var sectionIndex: Int?
     @IBOutlet weak var safeButton: RoundButton!
@@ -25,7 +26,7 @@ class AddExpandedCell: UITableViewCell, NibLoadable {
     func configure(sectionIndex: Int, safetyGrade: SafetyGrade, data: ExpandCellData) {
         self.sectionIndex = sectionIndex
         selectedGrade = data.safetyGrade
-        descTextView.text = data.desc
+        descTextView.text = data.desc == "데이터 없음" ? "" : data.desc
         changeButtonColor(selectedGrade: data.safetyGrade)
         
     }
@@ -53,8 +54,10 @@ class AddExpandedCell: UITableViewCell, NibLoadable {
     }
     
     @IBAction func selectButton(_ sender: RoundButton) {
-        //todo 다시 누르면 취소
-        selectedGrade = SafetyGrade(rawValue: sender.tag) ?? .unknown
+        if let buttonGrade = SafetyGrade(rawValue: sender.tag) {
+            //선택된 버튼의 값이 이전과 같으면 취소
+            selectedGrade = buttonGrade == selectedGrade ? .unknown : buttonGrade
+        }
         changeButtonColor(selectedGrade: selectedGrade)
         if let sectionIndex = sectionIndex {
             addExpandedCellDelegate?.clickSafteyButton(sectionIndex: sectionIndex, grade: selectedGrade)
