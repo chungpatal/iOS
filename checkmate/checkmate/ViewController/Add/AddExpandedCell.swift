@@ -34,19 +34,26 @@ class AddExpandedCell: UITableViewCell, NibLoadable {
         safeButton.backgroundColor = #colorLiteral(red: 0.9906734824, green: 0.990696609, blue: 0.9906842113, alpha: 1)
         warnButton.backgroundColor = #colorLiteral(red: 0.9906734824, green: 0.990696609, blue: 0.9906842113, alpha: 1)
         dangerButton.backgroundColor = #colorLiteral(red: 0.9906734824, green: 0.990696609, blue: 0.9906842113, alpha: 1)
+        safeButton.setTitleColor(UIColor.MyTheme.greyishBrown, for: .normal)
+        warnButton.setTitleColor(UIColor.MyTheme.greyishBrown, for: .normal)
+        dangerButton.setTitleColor(UIColor.MyTheme.greyishBrown, for: .normal)
         switch selectedGrade {
         case .safe:
             safeButton.backgroundColor = #colorLiteral(red: 0, green: 0.462745098, blue: 1, alpha: 1)
+            safeButton.setTitleColor(.white, for: .normal)
         case .warn:
             warnButton.backgroundColor = #colorLiteral(red: 1, green: 0.8078431373, blue: 0, alpha: 1)
+            warnButton.setTitleColor(.white, for: .normal)
         case .danger:
             dangerButton.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
+            dangerButton.setTitleColor(.white, for: .normal)
         default:
             break
         }
     }
     
     @IBAction func selectButton(_ sender: RoundButton) {
+        //todo 다시 누르면 취소
         selectedGrade = SafetyGrade(rawValue: sender.tag) ?? .unknown
         changeButtonColor(selectedGrade: selectedGrade)
         if let sectionIndex = sectionIndex {
